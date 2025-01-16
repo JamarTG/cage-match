@@ -22,7 +22,6 @@ function App() {
     prov: false,
     username: "",
   });
-  const [loading, setLoading] = useState(true);
 
   const match = {
     date: new Date("2025-01-15T10:00:00.000Z").toLocaleDateString(),
@@ -33,15 +32,17 @@ function App() {
 
   const isLargeScreen = useMediaQuery({ query: "(min-width: 1024px)" });
 
-  const handleVideoReady = () => {
-    setLoading(false);
-  };
-
   return (
     <div className="flex flex-col h-screen w-screen">
-      <div className={`justify-between flex flex-col justify-center items-center md:flex-row w-full ${isLargeScreen ? "h-full" : ""}`}>
+      <div
+        className={`justify-between flex flex-col justify-center items-center md:flex-row w-full ${
+          isLargeScreen ? "h-full" : ""
+        }`}
+      >
         <div className="flex flex-col justify-start items-center md:flex-row h-full w-full relative">
-          <div className="w-full h-full bg-gray-800 stream-load-bg"> {/* Add a background color here */}
+          <div className="w-full h-full bg-gray-800 stream-load-bg">
+            {" "}
+            {/* Add a background color here */}
             <ReactTwitchEmbedVideo
               channel={"masterglaves"}
               chat="mobile"
@@ -49,8 +50,6 @@ function App() {
               height={isLargeScreen ? "100%" : "1000px"} // Adjust height for larger screens
               chatWidth="500px"
               autoplay
-          
-              onVideoReady={handleVideoReady}
             />
           </div>
         </div>
