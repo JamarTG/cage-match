@@ -12,6 +12,13 @@ body {
   width: 100%;
 }
 
+.stream-load-bg{
+  background-image: url("piece.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-color: rgb(25, 25, 25);
+}
+
 .bg {
   background-image: url("cage.svg");
   background-size: cover;

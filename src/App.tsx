@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import "./App.css";
 import { PlayerDetails } from "./types/interfaces";
 import ViewMatch from "./components/ViewMatch";
 import ReactTwitchEmbedVideo from "react-twitch-embed-video";
 import { useMediaQuery } from "react-responsive";
-import { ClipLoader } from "react-spinners";
 
 function App() {
   const [player1Details, setPlayer1Details] = useState<PlayerDetails>({
@@ -34,41 +33,35 @@ function App() {
 
   const isLargeScreen = useMediaQuery({ query: "(min-width: 1024px)" });
 
-  useEffect(() => {
-    // Simulate a loading delay
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
+  const handleVideoReady = () => {
+    setLoading(false);
+  };
 
   return (
     <div className="flex flex-col h-screen w-screen">
-      {loading ? (
-        <div className="flex justify-center items-center h-full w-full">
-          <ClipLoader size={150} color={"#123abc"} loading={loading} />
-        </div>
-      ) : (
-        <div className={`justify-between flex flex-col justify-center items-center md:flex-row w-full ${isLargeScreen ? "h-full" : ""}`}>
-          <div className="flex flex-col justify-start items-center md:flex-row h-full w-full">
+      <div className={`justify-between flex flex-col justify-center items-center md:flex-row w-full ${isLargeScreen ? "h-full" : ""}`}>
+        <div className="flex flex-col justify-start items-center md:flex-row h-full w-full relative">
+          <div className="w-full h-full bg-gray-800 stream-load-bg"> {/* Add a background color here */}
             <ReactTwitchEmbedVideo
               channel={"masterglaves"}
               chat="mobile"
               width="100%"
               height={isLargeScreen ? "100%" : "1000px"} // Adjust height for larger screens
               chatWidth="500px"
+              autoplay
+          
+              onVideoReady={handleVideoReady}
             />
           </div>
-          <ViewMatch
-            match={match}
-            player1Details={player1Details}
-            player2Details={player2Details}
-            setPlayer1Details={setPlayer1Details}
-            setPlayer2Details={setPlayer2Details}
-          />
         </div>
-      )}
+        <ViewMatch
+          match={match}
+          player1Details={player1Details}
+          player2Details={player2Details}
+          setPlayer1Details={setPlayer1Details}
+          setPlayer2Details={setPlayer2Details}
+        />
+      </div>
     </div>
   );
 }

@@ -200,7 +200,7 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
                           : games[currentGameIndex].winner === "black"
                           ? "text-red-500"
                           : games[currentGameIndex].winner === "draw"
-                          ? "text-yellow-500"
+                          ? "text-black-500"
                           : "text-gray-500"
                       }`}
                     >
@@ -227,7 +227,7 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
                           : games[currentGameIndex].winner === "white"
                           ? "text-red-500"
                           : games[currentGameIndex].winner === "draw"
-                          ? "text-yellow-500"
+                          ? "text-black"
                           : "text-gray-500"
                       }`}
                     >
