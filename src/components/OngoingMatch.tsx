@@ -2,6 +2,8 @@ import { Chess } from "chess.js";
 import React, { useEffect, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { updateChessInstance } from "../utils";
+import Format from "./Format";
+import { useMediaQuery } from "react-responsive";
 
 interface Match {
   date: string;
@@ -70,6 +72,11 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
   const [chessInstances, setChessInstances] = useState<Chess[]>([]);
   const [currentGameIndex, setCurrentGameIndex] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
+
+  const isSmallScreen = useMediaQuery({ query: "(max-width: 600px)" });
+  const isMediumScreen = useMediaQuery({ query: "(max-width: 900px)" });
+
+  const boardWidth = isSmallScreen ? 300 : isMediumScreen ? 400 : 500;
 
   useEffect(() => {
     const fetchGames = async () => {
@@ -141,44 +148,46 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
   };
 
   return (
-    <div className=" h-full w-full flex justify-center items-center p-5 text-xs text-white rounded-lg">
+    <div className="w-full flex justify-center text-sm text-white rounded-md p-2">
       {error ? (
-        <div className="text-red-500 text-center">{error}</div>
+        <div className="text-center">{error}</div>
       ) : (
-        <div className="space-y-4">
+        <div className="space-y-4 w-full">
           {games.length === 0 ? (
             <div className="text-center text-3xl text-gray-400 flex justify-center items-center">
               No Games Played
             </div>
           ) : (
-            <div className="flex flex-col items-center">
-              <div className="flex gap-3 text-gray-400 cursor-pointer p-4 rounded-lg">
+            <div className=" flex flex-col items-center w-full">
+              <div className="justify-center items-center flex gap-3 text-gray-400 cursor-pointer rounded-lg">
                 <button
-                  className="text-white px-2 py-1 rounded"
+                  className={`text-white rounded ${
+                    currentGameIndex === 0 ? "disabled" : ""
+                  }`}
                   onClick={handlePreviousGame}
                   disabled={currentGameIndex === 0}
                 >
-                  <svg
-                    width="2em"
-                    height="2em"
-                    fill="currentColor"
+                    <svg
+                    width="5em"
+                    height="5em"
+                    fill={currentGameIndex === 0 ? "grey" : "#277F71"}
                     viewBox="0 0 16 16"
-                  >
+                    >
                     <path d="M10 12.796V3.204L4.519 8zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753" />
-                  </svg>
+                    </svg>
                 </button>
-                <div className="flex flex-col">
-                  <div className="text-xs text-gray-500">
-                    Game {currentGameIndex + 1}
+                <div className="flex flex-col ">
+                  <div className="text-2xl text-gray-500">
+                    {/* Game {currentGameIndex + 1} */}
                   </div>
-                  <div className="flex gap-2">
-                    <span className="icon">&#xe028;</span>
-                    <p className="text-xs">
+                  <div className="p-2 flex gap-2 justify-between items-center w-full" style={{ width: boardWidth }}>
+                    <span className="icon text-3xl">&#xe028;</span>
+                    <p className="text-2xl w-full">
                       {games[currentGameIndex].players.white.user.id} (
                       {games[currentGameIndex].players.white.rating})
                     </p>
                     <p
-                      className={`text-xs ${
+                      className={`text-2xl  ${
                         games[currentGameIndex].winner === "white"
                           ? "text-green-500"
                           : games[currentGameIndex].winner === "black"
@@ -195,14 +204,14 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
                         : "½"}
                     </p>
                   </div>
-                  <div className="flex gap-2">
-                    <span className="icon">&#xe029;</span>
-                    <p className="text-xs">
+                    <div className="p-2 flex gap-2 justify-between items-center w-full" style={{ width: boardWidth }}>
+                    <span className="icon text-3xl">&#xe029;</span>
+                    <p className="text-2xl w-full">
                       {games[currentGameIndex].players.black.user.id} (
                       {games[currentGameIndex].players.black.rating})
                     </p>
                     <p
-                      className={`text-xs ${
+                      className={`text-2xl ${
                         games[currentGameIndex].winner === "black"
                           ? "text-green-500"
                           : games[currentGameIndex].winner === "white"
@@ -221,57 +230,81 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
                   </div>
                   <div className="flex justify-center gap-2 w-full">
                     <button
-                      className="text-white px-2 py-1 rounded"
+                      className={`text-white rounded ${
+                        currentMoveIndexes[currentGameIndex] === 0
+                          ? "disabled"
+                          : ""
+                      }`}
                       onClick={() => handlePreviousMove(currentGameIndex)}
+                      disabled={currentMoveIndexes[currentGameIndex] === 0}
                     >
-                      <svg
-                        width="2em"
-                        height="2em"
-                        fill="currentColor"
+                        {/* <svg
+                        width="4em"
+                        height="4em"
+                        fill={
+                          currentMoveIndexes[currentGameIndex] === 0
+                          ? "grey"
+                          : "#277F71"
+                        }
                         viewBox="0 0 24 24"
-                      >
+                        >
                         <path d="m16 7-7 5 7 5zm-7 5V7H7v10h2z" />
-                      </svg>
+                        </svg> */}
                     </button>
                     <button
-                      className="text-white px-2 py-1 rounded"
+                      className={`text-white rounded ${
+                        currentMoveIndexes[currentGameIndex] ===
+                        games[currentGameIndex].moves.split(" ").length
+                          ? "disabled"
+                          : ""
+                      }`}
                       onClick={() => handleNextMove(currentGameIndex)}
+                      disabled={
+                        currentMoveIndexes[currentGameIndex] ===
+                        games[currentGameIndex].moves.split(" ").length
+                      }
                     >
-                      <svg
-                        width="2em"
-                        height="2em"
-                        fill="currentColor"
+                        {/* <svg
+                        width="4em"
+                        height="4em"
+                        fill={
+                          currentMoveIndexes[currentGameIndex] ===
+                          games[currentGameIndex].moves.split(" ").length
+                          ? "grey"
+                          : "#277F71"
+                        }
                         viewBox="0 0 24 24"
-                      >
+                        >
                         <path d="M7 7v10l7-5zm9 10V7h-2v10z" />
-                      </svg>
+                        </svg> */}
                     </button>
                   </div>
-                
                 </div>
-                
-
                 <button
-                  className="text-white px-2 py-1 rounded"
+                  className={`text-white rounded ${
+                    currentGameIndex === games.length - 1 ? "disabled" : ""
+                  }`}
                   onClick={handleNextGame}
                   disabled={currentGameIndex === games.length - 1}
                 >
-                  <svg
-                    width="2em"
-                    height="2em"
-                    fill="currentColor"
+                    <svg
+                    width="5em"
+                    height="5em"
+                    fill={currentGameIndex === games.length - 1 ? "grey" : "#277F71"}
                     viewBox="0 0 16 16"
-                  >
+                    >
                     <path d="M6 12.796V3.204L11.481 8zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753" />
-                  </svg>
+                    </svg>
                 </button>
               </div>
-              <div className="flex justify-center items-center w-full">
-                  <Chessboard
-                    boardWidth={Math.min(window.innerWidth, 250)}
-                    position={chessInstances[currentGameIndex].fen()}
-                  />
-                </div>
+              <div className="w-full flex justify-center items-center gap-4">
+                <Chessboard
+                  boardWidth={boardWidth}
+                  position={chessInstances[currentGameIndex].fen()}
+                  customLightSquareStyle={{ backgroundColor: "#FAFAFA" }}
+                  customDarkSquareStyle={{ backgroundColor: "#277F71" }}
+                />
+              </div>
             </div>
           )}
         </div>

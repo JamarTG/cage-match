@@ -1,18 +1,10 @@
-import React, { useEffect } from "react";
+// import React, { useEffect, useState } from "react";
 // import realNamesData from "../data/realNames.json";
 import PlayerInfo from "./PlayerInfo";
 import { Match } from "./Store";
 import { PlayerDetails } from "../types/interfaces";
 import OngoingMatch from "./OngoingMatch";
-
-// Define a type for the JSON data with an index signature
-// interface RealNames {
-//   [username: string]: string;
-// }
-
-// Cast the imported JSON data to the defined type
-// const realNames: RealNames = realNamesData;
-
+import { useEffect } from "react";
 interface ViewMatchProps {
   match: Match;
   player1Details: PlayerDetails;
@@ -80,6 +72,8 @@ const ViewMatch: React.FC<ViewMatchProps> = ({
     }
   };
 
+  // const [timeRemaining, setTimeRemaining] = useState<string>("");
+
   useEffect(() => {
     const fetchDetails = async () => {
       const details1 = await fetchPlayerDetails(match.player1Username);
@@ -91,51 +85,54 @@ const ViewMatch: React.FC<ViewMatchProps> = ({
     fetchDetails();
   }, [match.player1Username, match.player2Username]);
 
-  function calculateTimeDifference(date: string, time: string) {
-    if (!time) return "";
+  // function calculateTimeDifference(date: string, time: string) {
+  //   if (!time) return "";
 
-    const [timePart, modifier] = time.split(" ");
-    let [hours, minutes] = timePart.split(":").map(Number);
-    if (modifier === "PM" && hours !== 12) hours += 12;
-    if (modifier === "AM" && hours === 12) hours = 0;
+  //   const [timePart, modifier] = time.split(" ");
+  //   let [hours, minutes] = timePart.split(":").map(Number);
+  //   if (modifier === "PM" && hours !== 12) hours += 12;
+  //   if (modifier === "AM" && hours === 12) hours = 0;
 
-    const matchDateTime = new Date(date);
-    matchDateTime.setHours(hours, minutes, 0, 0);
-    const now = new Date();
-    const diffInSeconds = Math.round(
-      (matchDateTime.getTime() - now.getTime()) / 1000
-    );
-    const diffInMinutes = Math.floor(diffInSeconds / 60);
-    const remainingSeconds = diffInSeconds % 60;
-    const diffInHours = Math.floor(diffInMinutes / 60);
-    const remainingMinutes = diffInMinutes % 60;
+  //   const matchDateTime = new Date(date);
+  //   matchDateTime.setHours(hours, minutes, 0, 0);
+  //   const now = new Date();
+  //   const diffInSeconds = Math.round(
+  //     (matchDateTime.getTime() - now.getTime()) / 1000
+  //   );
+  //   const diffInMinutes = Math.floor(diffInSeconds / 60);
+  //   const remainingSeconds = diffInSeconds % 60;
+  //   const diffInHours = Math.floor(diffInMinutes / 60);
+  //   const remainingMinutes = diffInMinutes % 60;
 
-    if (diffInSeconds <= 0) {
-      if (diffInHours <= -3) {
-        return "Match ended";
-      }
-      return "Match Ongoing";
-    }
+  //   if (diffInSeconds <= 0) {
+  //     if (diffInHours <= -3) {
+  //       return "Match ended";
+  //     }
+  //     return "Match Ongoing";
+  //   }
 
-    const hoursDisplay = diffInHours > 0 ? `${diffInHours}h ` : "";
-    const minutesDisplay = remainingMinutes > 0 ? `${remainingMinutes}m ` : "";
-    const secondsDisplay = `${remainingSeconds}s`;
+  //   const hoursDisplay = diffInHours > 0 ? `${diffInHours}h ` : "";
+  //   const minutesDisplay = remainingMinutes > 0 ? `${remainingMinutes}m ` : "";
+  //   const secondsDisplay = `${remainingSeconds}s`;
 
-    return `${hoursDisplay}${minutesDisplay}${secondsDisplay}`.trim();
-  }
+  //   return `${hoursDisplay}${minutesDisplay}${secondsDisplay}`.trim();
+  // }
 
   // useEffect(() => {
   //   const interval = setInterval(() => {
-  //     setTimeRemaining(calculateTimeDifference(match.date, match.time));
+  //     // setTimeRemaining(calculateTimeDifference(match.date, match.time));
   //   }, 1000);
 
   //   return () => clearInterval(interval);
   // }, [match.date, match.time]);
 
   return (
-    <div className="flex flex-col justify-center p-5 items-center h-full w-full">
-      <PlayerInfo players={[player1Details, player2Details]} scores={[0, 0]} />
-      <OngoingMatch match={match} />
+    <div className="flex flex-col md:flex-row h-4/5 w-full">
+      <PlayerInfo
+        match={match}
+        players={[player1Details, player2Details]}
+        scores={[0, 0]}
+      />
     </div>
   );
 };
