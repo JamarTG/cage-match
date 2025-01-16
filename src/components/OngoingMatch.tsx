@@ -2,7 +2,6 @@ import { Chess } from "chess.js";
 import React, { useEffect, useState } from "react";
 import { Chessboard } from "react-chessboard";
 import { updateChessInstance } from "../utils";
-import Format from "./Format";
 import { useMediaQuery } from "react-responsive";
 
 interface Match {

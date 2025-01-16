@@ -3,7 +3,6 @@ import "./App.css";
 import { PlayerDetails } from "./types/interfaces";
 import ViewMatch from "./components/ViewMatch";
 import ReactTwitchEmbedVideo from "react-twitch-embed-video";
-import Navbar from "./components/Navbar";
 import { useMediaQuery } from "react-responsive";
 
 function App() {

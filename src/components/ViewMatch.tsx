@@ -3,7 +3,6 @@
 import PlayerInfo from "./PlayerInfo";
 import { Match } from "./Store";
 import { PlayerDetails } from "../types/interfaces";
-import OngoingMatch from "./OngoingMatch";
 import { useEffect } from "react";
 interface ViewMatchProps {
   match: Match;
