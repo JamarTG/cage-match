@@ -27,9 +27,15 @@ const PlayersInfo: React.FC<PlayersInfoProps> = ({
     <div className="flex flex-col justify-center items-center w-full text-white p-4">
       <button
         onClick={toggleModal}
-        className="absolute top-2 right-2 bg-blue-500 text-white px-6 py-3 rounded text-lg"
+        className="flex justify-center items-center gap-2 absolute top-2 right-2 bg-blue-500 text-white px-6 py-3 rounded text-lg"
       >
-        View Results
+        <svg width="1em" height="1em" fill="none" viewBox="0 0 24 24">
+          <path
+            fill="currentColor"
+            d="M18 3h1a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2zM11.5 9h1a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2zM5 16h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-1a2 2 0 0 1 2-2z"
+          />
+        </svg>{" "}
+        View Games
       </button>
 
       {isModalOpen && (

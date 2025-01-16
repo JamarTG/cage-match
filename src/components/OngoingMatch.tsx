@@ -4,6 +4,7 @@ import { Chessboard } from "react-chessboard";
 import { updateChessInstance } from "../utils";
 import { useMediaQuery } from "react-responsive";
 
+
 interface Match {
   date: string;
   time: string;
@@ -154,7 +155,11 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
         <div className="space-y-4 w-full">
           {games.length === 0 ? (
             <div className="text-center text-3xl text-gray-400 flex justify-center items-center">
-              No Games Played
+              
+
+              <div className="text-center text-3xl text-gray-400 flex justify-center items-center">
+                <img src="/public/piece.png" width={500} alt="" />
+              </div>
             </div>
           ) : (
             <div className=" flex flex-col items-center w-full">
@@ -166,20 +171,23 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
                   onClick={handlePreviousGame}
                   disabled={currentGameIndex === 0}
                 >
-                    <svg
+                  <svg
                     width="5em"
                     height="5em"
                     fill={currentGameIndex === 0 ? "grey" : "#277F71"}
                     viewBox="0 0 16 16"
-                    >
+                  >
                     <path d="M10 12.796V3.204L4.519 8zm-.659.753-5.48-4.796a1 1 0 0 1 0-1.506l5.48-4.796A1 1 0 0 1 11 3.204v9.592a1 1 0 0 1-1.659.753" />
-                    </svg>
+                  </svg>
                 </button>
                 <div className="flex flex-col ">
                   <div className="text-2xl text-gray-500">
                     {/* Game {currentGameIndex + 1} */}
                   </div>
-                  <div className="p-2 flex gap-2 justify-between items-center w-full" style={{ width: boardWidth }}>
+                  <div
+                    className="p-2 flex gap-2 justify-between items-center w-full"
+                    style={{ width: boardWidth }}
+                  >
                     <span className="icon text-3xl">&#xe028;</span>
                     <p className="text-2xl w-full">
                       {games[currentGameIndex].players.white.user.id} (
@@ -203,7 +211,10 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
                         : "½"}
                     </p>
                   </div>
-                    <div className="p-2 flex gap-2 justify-between items-center w-full" style={{ width: boardWidth }}>
+                  <div
+                    className="p-2 flex gap-2 justify-between items-center w-full"
+                    style={{ width: boardWidth }}
+                  >
                     <span className="icon text-3xl">&#xe029;</span>
                     <p className="text-2xl w-full">
                       {games[currentGameIndex].players.black.user.id} (
@@ -237,7 +248,7 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
                       onClick={() => handlePreviousMove(currentGameIndex)}
                       disabled={currentMoveIndexes[currentGameIndex] === 0}
                     >
-                        {/* <svg
+                      {/* <svg
                         width="4em"
                         height="4em"
                         fill={
@@ -263,7 +274,7 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
                         games[currentGameIndex].moves.split(" ").length
                       }
                     >
-                        {/* <svg
+                      {/* <svg
                         width="4em"
                         height="4em"
                         fill={
@@ -286,14 +297,16 @@ const OngoingMatch: React.FC<OngoingMatchProps> = ({ match }) => {
                   onClick={handleNextGame}
                   disabled={currentGameIndex === games.length - 1}
                 >
-                    <svg
+                  <svg
                     width="5em"
                     height="5em"
-                    fill={currentGameIndex === games.length - 1 ? "grey" : "#277F71"}
+                    fill={
+                      currentGameIndex === games.length - 1 ? "grey" : "#277F71"
+                    }
                     viewBox="0 0 16 16"
-                    >
+                  >
                     <path d="M6 12.796V3.204L11.481 8zm.659.753 5.48-4.796a1 1 0 0 0 0-1.506L6.66 2.451C6.011 1.885 5 2.345 5 3.204v9.592a1 1 0 0 0 1.659.753" />
-                    </svg>
+                  </svg>
                 </button>
               </div>
               <div className="w-full flex justify-center items-center gap-4">
