@@ -43,7 +43,7 @@ function App() {
       <div className={`justify-between flex flex-col justify-center items-center md:flex-row w-full ${isLargeScreen ? "h-full" : ""}`}>
         <div className="flex flex-col justify-start items-center md:flex-row h-full w-full">
           <ReactTwitchEmbedVideo
-            channel={"witty_alien"}
+            channel={"masterglaves"}
             chat="mobile"
             width= "100%" 
             height={isLargeScreen ? "100%" : "1000px"} // Adjust height for larger screens
