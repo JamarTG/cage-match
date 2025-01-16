@@ -24,7 +24,7 @@ const PlayersInfo: React.FC<PlayersInfoProps> = ({
   };
 
   return (
-    <div className="flex justify-center items-center w-full text-white p-4">
+    <div className="flex flex-col justify-center items-center w-full text-white p-4">
       <button
         onClick={toggleModal}
         className="absolute top-2 right-2 bg-blue-500 text-white px-6 py-3 rounded text-lg"
@@ -34,7 +34,7 @@ const PlayersInfo: React.FC<PlayersInfoProps> = ({
 
       {isModalOpen && (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 transition-opacity duration-300 ease-in-out">
-          <div className=" bg-black text-gray p-6 rounded transform transition-transform duration-300 ease-in-out translate-y-0">
+          <div className="bg-black text-gray p-6 rounded transform transition-transform duration-300 ease-in-out translate-y-0">
             <button
               onClick={toggleModal}
               className="absolute top-2 right-2 text-lg"
@@ -56,7 +56,7 @@ const PlayersInfo: React.FC<PlayersInfoProps> = ({
               e.currentTarget.src = `/default.jpg`;
             }}
             alt={players[0].username}
-            className="w-96 h-96 object-cover border-4 border-yellow-300 rounded-lg shadow-lg"
+            className="w-96 h-96 object-cover border-4 border-yellow-300 rounded-lg shadow-lg hidden sm:block"
           />
           <div className="flex flex-col md:flex-row text-xl font-bold gap-2 justify-center items-center mt-4">
             <p className="flex gap-2 text-orange-400 text-sm sm:text-sm md:text-sm lg:text-lg xl:text-xl whitespace-nowrap">
@@ -83,14 +83,14 @@ const PlayersInfo: React.FC<PlayersInfoProps> = ({
 
         <div className="text-white text-xl font-bold mx-6">vs</div>
 
-        <div className="flex  flex-col items-center mb-4">
+        <div className="flex flex-col items-center mb-4">
           <img
             src={`/${players[1].username.toLowerCase()}.jpeg`}
             onError={(e) => {
               e.currentTarget.src = `/default.jpg`;
             }}
             alt={players[1].username}
-            className="w-96 h-96 object-cover border-4 border-gold rounded-lg shadow-lg"
+            className="w-96 h-96 object-cover border-4 border-gold rounded-lg shadow-lg hidden sm:block"
           />
 
           <div className="flex flex-col md:flex-row text-xl font-bold gap-2 justify-center items-center mt-4">

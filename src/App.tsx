@@ -40,7 +40,7 @@ function App() {
         playerTwoUsername={match.player2Username}
         playerTwoScore={0}
       /> */}
-      <div className=" justify-between flex flex-col justify-center items-center md:flex-row h-full w-full">
+      <div className={`justify-between flex flex-col justify-center items-center md:flex-row w-full ${isLargeScreen ? "h-full" : ""}`}>
         <div className="flex flex-col justify-start items-center md:flex-row h-full w-full">
           <ReactTwitchEmbedVideo
             channel={"witty_alien"}
