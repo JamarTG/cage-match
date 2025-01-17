@@ -1,9 +1,8 @@
-// import React, { useEffect, useState } from "react";
-// import realNamesData from "../data/realNames.json";
+import React, { useEffect} from "react";
 import PlayerInfo from "./PlayerInfo";
 import { Match } from "./Store";
 import { PlayerDetails } from "../types/interfaces";
-import { useEffect } from "react";
+
 interface ViewMatchProps {
   match: Match;
   player1Details: PlayerDetails;
@@ -19,6 +18,8 @@ const ViewMatch: React.FC<ViewMatchProps> = ({
   setPlayer1Details,
   setPlayer2Details,
 }) => {
+
+
   const fetchPlayerDetails = async (
     username: string
   ): Promise<PlayerDetails> => {
@@ -71,7 +72,7 @@ const ViewMatch: React.FC<ViewMatchProps> = ({
     }
   };
 
-  // const [timeRemaining, setTimeRemaining] = useState<string>("");
+
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -84,54 +85,15 @@ const ViewMatch: React.FC<ViewMatchProps> = ({
     fetchDetails();
   }, [match.player1Username, match.player2Username]);
 
-  // function calculateTimeDifference(date: string, time: string) {
-  //   if (!time) return "";
-
-  //   const [timePart, modifier] = time.split(" ");
-  //   let [hours, minutes] = timePart.split(":").map(Number);
-  //   if (modifier === "PM" && hours !== 12) hours += 12;
-  //   if (modifier === "AM" && hours === 12) hours = 0;
-
-  //   const matchDateTime = new Date(date);
-  //   matchDateTime.setHours(hours, minutes, 0, 0);
-  //   const now = new Date();
-  //   const diffInSeconds = Math.round(
-  //     (matchDateTime.getTime() - now.getTime()) / 1000
-  //   );
-  //   const diffInMinutes = Math.floor(diffInSeconds / 60);
-  //   const remainingSeconds = diffInSeconds % 60;
-  //   const diffInHours = Math.floor(diffInMinutes / 60);
-  //   const remainingMinutes = diffInMinutes % 60;
-
-  //   if (diffInSeconds <= 0) {
-  //     if (diffInHours <= -3) {
-  //       return "Match ended";
-  //     }
-  //     return "Match Ongoing";
-  //   }
-
-  //   const hoursDisplay = diffInHours > 0 ? `${diffInHours}h ` : "";
-  //   const minutesDisplay = remainingMinutes > 0 ? `${remainingMinutes}m ` : "";
-  //   const secondsDisplay = `${remainingSeconds}s`;
-
-  //   return `${hoursDisplay}${minutesDisplay}${secondsDisplay}`.trim();
-  // }
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     // setTimeRemaining(calculateTimeDifference(match.date, match.time));
-  //   }, 1000);
-
-  //   return () => clearInterval(interval);
-  // }, [match.date, match.time]);
 
   return (
-    <div className="flex flex-col md:flex-row h-4/5 w-full">
+    <div className="flex flex-col h-4/5 w-full p-4 rounded-lg shadow-md">
       <PlayerInfo
         match={match}
         players={[player1Details, player2Details]}
         scores={[0, 0]}
       />
+
     </div>
   );
 };

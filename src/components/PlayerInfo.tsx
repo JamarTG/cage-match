@@ -24,10 +24,10 @@ const PlayersInfo: React.FC<PlayersInfoProps> = ({
   };
 
   return (
-    <div className="flex flex-col justify-center items-center w-full text-white p-4">
+    <div className="flex flex-col justify-center items-center w-full gap-9 text-white p-4">
       <button
       onClick={toggleModal}
-      className="flex justify-center items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded text-lg sm:hidden"
+      className="flex justify-center items-center gap-2 bg-blue-500 text-white px-6 py-3 rounded text-lg"
       >
       <svg width="1em" height="1em" fill="none" viewBox="0 0 24 24">
         <path

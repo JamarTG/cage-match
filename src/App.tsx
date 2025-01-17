@@ -25,8 +25,8 @@ function App() {
   });
 
   const match = {
-    date: new Date("2025-01-15T10:00:00.000Z").toLocaleDateString(),
-    time: "9:32 AM",
+    date: new Date("2025-01-19T10:00:00.000Z").toLocaleDateString(),
+    time: "10:00 PM",
     player1Username: "daddystrength",
     player2Username: "JamariTheGreat",
   };
@@ -34,12 +34,13 @@ function App() {
   const isLargeScreen = useMediaQuery({ query: "(min-width: 1024px)" });
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col ">
       <Navbar
         playerOneUsername={player1Details.username}
         playerOneScore={0}
         playerTwoUsername={player2Details.username}
         playerTwoScore={0}
+        match={match}
       />
       <div className="flex flex-col items-center h-screen w-screen">
         <div
