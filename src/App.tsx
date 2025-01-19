@@ -4,7 +4,6 @@ import "./App.css";
 import { SharpPerson } from "./components/svg/SharpPerson";
 import { BaselineInsertChartOutlined } from "./components/svg/BaselineInsertChartOutlined";
 import { BaselineCalendarMonth } from "./components/svg/BaselineCalendarMonth";
-import { Twitch } from "./components/svg/Twitch";
 import UpcomingMatches from "./components/UpcomingMatches";
 import PlayerRecords from "./components/PlayerRecords";
 import MatchHistory from "./components/MatchHistory";
@@ -30,14 +29,12 @@ const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("upcomingMatches");
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-    
-
+    <div className="min-h-screen text-white">
       <main className="container mx-auto px-4 py-8">
         {/* Navigation Buttons */}
         <div className="flex justify-center mb-8">
           <button
-            className={`flex justify-center items-center px-4 py-2 mx-2 gap-3 ${
+            className={`flex justify-center items-center px-4 py-2 mx-2 gap-3 border-2 border-white rounded-lg transition duration-300 ease-in-out transform hover:scale-105 ${
               activeSection === "upcomingMatches"
                 ? "bg-indigo-600 text-white"
                 : "bg-gray-700"
@@ -48,7 +45,7 @@ const App: React.FC = () => {
             Upcoming Matches
           </button>
           <button
-            className={`flex justify-center items-center px-4 py-2 mx-2 gap-3 ${
+            className={`flex justify-center items-center px-4 py-2 mx-2 gap-3 border-2 border-white rounded-lg transition duration-300 ease-in-out transform hover:scale-105 ${
               activeSection === "playerRecords"
                 ? "bg-indigo-600 text-white"
                 : "bg-gray-700"
@@ -59,7 +56,7 @@ const App: React.FC = () => {
             Player Records
           </button>
           <button
-            className={`flex justify-center items-center px-4 py-2 mx-2 gap-3 ${
+            className={`flex justify-center items-center px-4 py-2 mx-2 gap-3 border-2 border-white rounded-lg transition duration-300 ease-in-out transform hover:scale-105 ${
               activeSection === "matchHistory"
                 ? "bg-indigo-600 text-white"
                 : "bg-gray-700"
@@ -77,13 +74,24 @@ const App: React.FC = () => {
         {activeSection === "matchHistory" && <MatchHistory />}
       </main>
 
-      <div className="min-h-screen flex flex-col">
-        <footer className="bg-gray-800 text-gray-400 py-4 mt-auto">
-          <div className="container mx-auto px-4 text-center">
-            <p>&copy; 2025 Loone Strength. All rights reserved.</p>
-          </div>
-        </footer>
-      </div>
+      
+        <div className="flex flex-col">
+          <footer className="bg-gray-800 text-gray-400 p-2">
+        <div className="container mx-auto px-4 text-center">
+          <p>
+            &copy; 2025 by{" "}
+            <a
+          href="https://github.com/JamarTG"
+          className="text-indigo-400 hover:underline"
+          target="_blank"
+            >
+          JamarTG
+            </a>
+          </p>
+        </div>
+          </footer>
+        </div>
+ 
     </div>
   );
 };

@@ -1,30 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
-
 * {
   font-family: "Noto Sans", serif;
 }
+
 body {
-  background-color: hsl(286, 29%, 77%);
-  background-image: url("cage.svg");
+  background-image: url("background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  width: 100%;
+  background-position: center;
+  background-attachment: fixed;
 }
 
-.fail {
-  background-image: url("piece.png");
+.table-bg {
+  background-image: url("table.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-color: rgb(25, 25, 25);
 }
 
-.bg {
-  background-image: url("cage.svg");
+/* .bg {
+  background-image: url("background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  width: 100%;
-}
+  background-position: center;
+  background-attachment: fixed;
+} */
 
 body::before {
   content: "";

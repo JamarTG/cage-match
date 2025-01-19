@@ -16,6 +16,7 @@ const fetchMatches = async (player1, player2, date) => {
     url.searchParams.append("since", since);
     url.searchParams.append("until", until);
     url.searchParams.append("max", 20);
+    url.searchParams.append("sort", "dateAsc"); // Fetch games in descending order
 
     const response = await fetch(url, {
       headers: {

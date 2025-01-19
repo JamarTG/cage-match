@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { Close } from "./svg/Close";
 import upcomingMatches from "../upcomingMatches.json";
+import realnames from "../realnames";
 
 Modal.setAppElement("#root");
 
@@ -24,13 +25,9 @@ const UpcomingMatches: React.FC = () => {
           const hours = Math.floor(timeRemaining / 1000 / 60 / 60);
           const minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
           const seconds = Math.floor((timeRemaining / 1000) % 60);
-          newCountdowns[index] = `${String(hours).padStart(
-            2,
-            "0"
-          )}:${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
-            2,
-            "0"
-          )}`;
+          newCountdowns[index] = `${String(hours).padStart(2, "0")}:${String(
+            minutes
+          ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
         } else {
           newCountdowns[index] = "Match Started";
         }
@@ -44,12 +41,9 @@ const UpcomingMatches: React.FC = () => {
     return () => clearInterval(interval);
   }, [matches]);
 
-
-
   const sortedMatches = matches.sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
-
 
   const now = new Date();
   const upcomingMatch = sortedMatches.find((match) => {
@@ -59,24 +53,36 @@ const UpcomingMatches: React.FC = () => {
       const [hour, minute] = timePart.split(":");
       const isPM = timePart.includes("PM");
       const hour24 = isPM ? (parseInt(hour) % 12) + 12 : parseInt(hour) % 12;
-      return new Date(`${year}-${month}-${day}T${String(hour24).padStart(2, "0")}:${minute}:00`);
+      return new Date(
+        `${year}-${month}-${day}T${String(hour24).padStart(
+          2,
+          "0"
+        )}:${minute}:00`
+      );
     };
 
     const matchDate = convertToDate(match.date);
     return matchDate > now;
-    return matchDate > now;
   });
-  
-  console.log
 
   if (!upcomingMatch) {
-    return <p className="text-gray-500 text-center">No upcoming matches.</p>;
+    return (
+      <div
+        style={{ height: "80vh" }}
+        className="bg p-6 rounded-lg shadow-lg space-y-6 text-white flex items-center justify-center"
+      >
+        <p className="text-gray-500 text-center">No upcoming matches.</p>
+      </div>
+    );
   }
 
   return (
-    <div className="text-white p-6 lg:p-8 rounded-lg shadow-lg space-y-8">
+    <div
+      style={{ height: "80vh" }}
+      className="bg p-6 rounded-lg space-y-6 text-white"
+    >
       {/* Main Match */}
-      <div className="bg flex flex-col justify-center items-center p-6 lg:p-8 rounded-lg shadow-2xl transform hover:scale-105 transition duration-300 space-y-6 relative">
+      <div>
         {/* Button to open modal */}
         <button
           onClick={() => setIsModalOpen(true)}
@@ -85,21 +91,25 @@ const UpcomingMatches: React.FC = () => {
           View Other Upcoming Matches
         </button>
         <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-6 space-y-6 lg:space-y-0">
-          <div className="flex flex-col items-center space-x-3">
-            <img
+            <div className="flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-6">
+            <div className="flex flex-col items-center space-x-3">
+              <h2 className="text-3xl m-2 font-bold text-center lg:text-left">
+              {realnames[upcomingMatch.player1.toLocaleLowerCase()] ?? "Unknown Player"}
+              </h2>
+              <img
               src={`/${upcomingMatch.player1}.jpg`}
               alt={`${upcomingMatch.player1}'s avatar`}
               onError={(e) => (e.currentTarget.src = "/default.jpg")}
-              className="w-48 h-48 lg:w-96 lg:h-96 border-4 border-indigo-600"
-            />
-            <div className="flex flex-row bg-red-">
+              className="hidden lg:block w-48 h-48 lg:w-96 lg:h-96 border-4 border-indigo-600"
+              />
+              <div className="flex flex-row bg-red-"></div>
               <a
-                href={`https://lichess.org/@/${upcomingMatch.player1}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className=" text-blue-500 text-lg lg:text-2xl font-semibold"
+          href={`https://lichess.org/@/${upcomingMatch.player1}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className=" text-blue-500 text-lg lg:text-2xl font-semibold"
               >
-                {upcomingMatch.player1}
+          {upcomingMatch.player1}
               </a>
             </div>
           </div>
@@ -107,20 +117,24 @@ const UpcomingMatches: React.FC = () => {
             VS
           </p>
           <div className="flex flex-col items-center space-x-3">
+            <h2 className="text-3xl m-2 font-bold">
+              {realnames[upcomingMatch.player2.toLocaleLowerCase()] ??
+          "Unknown Player"}
+            </h2>
             <img
               src={`/${upcomingMatch.player2}.jpg`}
               alt={`${upcomingMatch.player2}'s avatar`}
               onError={(e) => (e.currentTarget.src = "/default.jpg")}
-              className="w-48 h-48 lg:w-96 lg:h-96 border-4 border-indigo-600"
+              className="hidden lg:block w-48 h-48 lg:w-96 lg:h-96 border-4 border-indigo-600"
             />
             <div>
               <a
-                href={`https://lichess.org/@/${upcomingMatch.player2}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-lg lg:text-2xl font-semibold"
+          href={`https://lichess.org/@/${upcomingMatch.player2}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className=" text-blue-500 text-lg lg:text-2xl font-semibold"
               >
-                {upcomingMatch.player2}
+          {upcomingMatch.player2}
               </a>
             </div>
           </div>
@@ -151,7 +165,9 @@ const UpcomingMatches: React.FC = () => {
           </div>
         </div>
         <div className="text-7xl lg:text-8xl font-bold text-white mt-4">
-          <span className="text-6xl">{countdowns[matches.indexOf(upcomingMatch)]}</span>
+          <span className="text-6xl">
+            {countdowns[matches.indexOf(upcomingMatch)]}
+          </span>
         </div>
       </div>
       {/* Modal for other matches */}
@@ -207,18 +223,22 @@ const UpcomingMatches: React.FC = () => {
                 <div className="flex flex-wrap justify-between text-xs lg:text-sm text-gray-400 mt-3">
                   <div className="flex items-center space-x-1">
                     <span className="font-medium">Date:</span>
-                    <span>{new Date(match.date).toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "long",
-                      day: "numeric",
-                    })}</span>
+                    <span>
+                      {new Date(match.date).toLocaleDateString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                      })}
+                    </span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <span className="font-medium">Time:</span>
-                    <span>{new Date(match.date).toLocaleTimeString("en-US", {
-                      hour: "2-digit",
-                      minute: "2-digit",
-                    })}</span>
+                    <span>
+                      {new Date(match.date).toLocaleTimeString("en-US", {
+                        hour: "2-digit",
+                        minute: "2-digit",
+                      })}
+                    </span>
                   </div>
                   <div className="flex items-center space-x-1">
                     <span className="font-medium">Format:</span>

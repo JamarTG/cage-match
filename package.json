@@ -14,16 +14,12 @@
     "@fortawesome/react-fontawesome": "^0.2.2",
     "@types/chess.js": "^0.13.7",
     "axios": "^1.7.9",
-    "chess.js": "^1.0.0",
     "react": "^18.3.1",
-    "react-chessboard": "^4.7.2",
+    "react-bracket": "^0.0.4",
     "react-dom": "^18.3.1",
-    "react-draggable": "^4.4.6",
     "react-modal": "^3.16.3",
     "react-responsive": "^10.0.0",
-    "react-rnd": "^10.4.14",
-    "react-spinners": "^0.15.0",
-    "react-twitch-embed-video": "^3.1.0"
+    "react-rnd": "^10.4.14"
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
