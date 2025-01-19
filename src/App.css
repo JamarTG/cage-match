@@ -1,29 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Unbounded:wght@200..900&display=swap');
-* {
-  font-family: "Unbounded", sans-serif;
-  font-size: medium;
-}
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
+
+* {
+  font-family: "Noto Sans", serif;
+}
 body {
-  background-color: rgb(25, 25, 25);
+  background-color: hsl(286, 29%, 77%);
   background-image: url("cage.svg");
   background-size: cover;
   background-repeat: no-repeat;
   width: 100%;
 }
 
-.stream-load-bg{
+.fail {
   background-image: url("piece.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-color: rgb(25, 25, 25);
-}
-
-.jamaican-bg{
-  background-image: url("jamaica.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-  width: 100%;
 }
 
 .bg {
@@ -57,8 +50,8 @@ body::before {
 }
 
 .glass-background {
-  background: rgba(0, 0, 0, 0.7);
-
+  background: rgba(20, 50, 132, 0.7);
+  opacity: 0.6;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);

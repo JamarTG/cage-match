@@ -1,75 +1,91 @@
-import { useState } from "react";
+import React, { useState } from "react";
+
 import "./App.css";
-import { PlayerDetails } from "./types/interfaces";
-import ViewMatch from "./components/ViewMatch";
-import ReactTwitchEmbedVideo from "react-twitch-embed-video";
-import { useMediaQuery } from "react-responsive";
-import Navbar from "./components/Navbar";
+import { SharpPerson } from "./components/svg/SharpPerson";
+import { BaselineInsertChartOutlined } from "./components/svg/BaselineInsertChartOutlined";
+import { BaselineCalendarMonth } from "./components/svg/BaselineCalendarMonth";
+import { Twitch } from "./components/svg/Twitch";
+import UpcomingMatches from "./components/UpcomingMatches";
+import PlayerRecords from "./components/PlayerRecords";
+import MatchHistory from "./components/MatchHistory";
 
-function App() {
-  const [player1Details, setPlayer1Details] = useState<PlayerDetails>({
-    rating: null,
-    flair: "",
-    url: "",
-    title: "",
-    prov: false,
-    username: "",
-  });
-  const [player2Details, setPlayer2Details] = useState<PlayerDetails>({
-    rating: null,
-    flair: "",
-    url: "",
-    title: "",
-    prov: false,
-    username: "",
-  });
+export interface Player {
+  name: string;
+  matchWins: number;
+  matchLosses: number;
+  gameWins: number;
+  gameLosses: number;
+  gameDraws: number;
+  averageKilltime: number;
+}
 
-  const match = {
-    date: new Date("2025-01-19T10:00:00.000Z").toLocaleDateString(),
-    time: "10:00 PM",
-    player1Username: "daddystrength",
-    player2Username: "JamariTheGreat",
-  };
+export interface Match {
+  player1: string;
+  player2: string;
+  winner: string;
+  loser: string;
+}
 
-  const isLargeScreen = useMediaQuery({ query: "(min-width: 1024px)" });
+const App: React.FC = () => {
+  const [activeSection, setActiveSection] = useState<string>("upcomingMatches");
 
   return (
-    <div className="flex flex-col ">
-      <Navbar
-        playerOneUsername={player1Details.username}
-        playerOneScore={0}
-        playerTwoUsername={player2Details.username}
-        playerTwoScore={0}
-        match={match}
-      />
-      <div className="flex flex-col items-center h-screen w-screen">
-        <div
-          className="justify-between flex flex-col justify-center items-center md:flex-row w-full"
-          style={{ height: isLargeScreen ? "90%" : "auto" }}
-        >
-          <div className="flex flex-col px-5 justify-start items-center md:flex-row h-full w-full relative">
-            <div className="w-full h-full bg-gray-800 stream-load-bg ">
-              <ReactTwitchEmbedVideo
-                channel={"masterglaves"}
-                chat="mobile"
-                width="100%"
-                height={isLargeScreen ? "100%" : "1000px"} // Adjust height for larger screens
-                chatWidth="500px"
-                autoplay
-              />
-            </div>
-          </div>
-          <ViewMatch
-            match={match}
-            player1Details={player1Details}
-            player2Details={player2Details}
-            setPlayer1Details={setPlayer1Details}
-            setPlayer2Details={setPlayer2Details}
-          />
+    <div className="min-h-screen bg-gray-900 text-white">
+    
+
+      <main className="container mx-auto px-4 py-8">
+        {/* Navigation Buttons */}
+        <div className="flex justify-center mb-8">
+          <button
+            className={`flex justify-center items-center px-4 py-2 mx-2 gap-3 ${
+              activeSection === "upcomingMatches"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-700"
+            }`}
+            onClick={() => setActiveSection("upcomingMatches")}
+          >
+            <BaselineCalendarMonth className="text-3xl" />
+            Upcoming Matches
+          </button>
+          <button
+            className={`flex justify-center items-center px-4 py-2 mx-2 gap-3 ${
+              activeSection === "playerRecords"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-700"
+            }`}
+            onClick={() => setActiveSection("playerRecords")}
+          >
+            <SharpPerson className="text-3xl" />
+            Player Records
+          </button>
+          <button
+            className={`flex justify-center items-center px-4 py-2 mx-2 gap-3 ${
+              activeSection === "matchHistory"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-700"
+            }`}
+            onClick={() => setActiveSection("matchHistory")}
+          >
+            <BaselineInsertChartOutlined className="text-3xl" />
+            Match History
+          </button>
         </div>
+
+        {/* Main Content Layout */}
+        {activeSection === "upcomingMatches" && <UpcomingMatches />}
+        {activeSection === "playerRecords" && <PlayerRecords />}
+        {activeSection === "matchHistory" && <MatchHistory />}
+      </main>
+
+      <div className="min-h-screen flex flex-col">
+        <footer className="bg-gray-800 text-gray-400 py-4 mt-auto">
+          <div className="container mx-auto px-4 text-center">
+            <p>&copy; 2025 Loone Strength. All rights reserved.</p>
+          </div>
+        </footer>
       </div>
     </div>
   );
-}
+};
 
 export default App;
