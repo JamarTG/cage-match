@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
-import { Close } from "./svg/Close";
-// import upcomingMatches from "../upcomingMatches.json";
 import upcomingMatches from "../upcoming.json";
 import realnames from "../realnames";
 
@@ -10,7 +8,6 @@ Modal.setAppElement("#root");
 const UpcomingMatches: React.FC = () => {
   const [matches, setMatches] = useState<any[]>([]);
   const [countdowns, setCountdowns] = useState<{ [key: string]: string }>({});
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
     setMatches(upcomingMatches.matches);
@@ -82,35 +79,28 @@ const UpcomingMatches: React.FC = () => {
       style={{ height: "80vh" }}
       className="bg p-6 rounded-lg space-y-6 text-white"
     >
-      {/* Main Match */}
       <div>
-        {/* Button to open modal */}
-        <button
-          onClick={() => setIsModalOpen(true)}
-          className="absolute top-2 right-2 bg-indigo-600 text-white p-2 rounded-lg"
-        >
-          View Other Upcoming Matches
-        </button>
         <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-6 space-y-6 lg:space-y-0">
-            <div className="flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-6">
+          <div className="flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-6">
             <div className="flex flex-col items-center space-x-3">
-              <h2 className="text-3xl m-2 font-bold text-center lg:text-left">
-              {realnames[upcomingMatch.player1.toLocaleLowerCase()] ?? "Unknown Player"}
+              <h2 className="text-2xl m-2 font-bold text-center lg:text-left">
+                {realnames[upcomingMatch.player1.toLocaleLowerCase()] ??
+                  "Unknown Player"}
               </h2>
               <img
-              src={`/${upcomingMatch.player1}.jpg`}
-              alt={`${upcomingMatch.player1}'s avatar`}
-              onError={(e) => (e.currentTarget.src = "/default.jpg")}
-              className="hidden lg:block w-48 h-48 lg:w-96 lg:h-96 border-4 border-indigo-600"
+                src={`/${upcomingMatch.player1}.jpg`}
+                alt={`${upcomingMatch.player1}'s avatar`}
+                onError={(e) => (e.currentTarget.src = "/default.jpg")}
+                className="hidden lg:block w-32 h-32 lg:w-64 lg:h-64 border-4 border-indigo-600"
               />
               <div className="flex flex-row bg-red-"></div>
               <a
-          href={`https://lichess.org/@/${upcomingMatch.player1}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className=" text-blue-500 text-lg lg:text-2xl font-semibold"
+                href={`https://lichess.org/@/${upcomingMatch.player1}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className=" text-blue-500 text-lg lg:text-2xl font-semibold"
               >
-          {upcomingMatch.player1}
+                {upcomingMatch.player1}
               </a>
             </div>
           </div>
@@ -118,24 +108,24 @@ const UpcomingMatches: React.FC = () => {
             VS
           </p>
           <div className="flex flex-col items-center space-x-3">
-            <h2 className="text-3xl m-2 font-bold">
+            <h2 className="text-2xl m-2 font-bold">
               {realnames[upcomingMatch.player2.toLocaleLowerCase()] ??
-          "Unknown Player"}
+                "Unknown Player"}
             </h2>
             <img
               src={`/${upcomingMatch.player2}.jpg`}
               alt={`${upcomingMatch.player2}'s avatar`}
               onError={(e) => (e.currentTarget.src = "/default.jpg")}
-              className="hidden lg:block w-48 h-48 lg:w-96 lg:h-96 border-4 border-indigo-600"
+              className="hidden lg:block w-32 h-32 lg:w-64 lg:h-64 border-4 border-indigo-600"
             />
             <div>
               <a
-          href={`https://lichess.org/@/${upcomingMatch.player2}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className=" text-blue-500 text-lg lg:text-2xl font-semibold"
+                href={`https://lichess.org/@/${upcomingMatch.player2}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className=" text-blue-500 text-lg lg:text-2xl font-semibold"
               >
-          {upcomingMatch.player2}
+                {upcomingMatch.player2}
               </a>
             </div>
           </div>
@@ -166,91 +156,11 @@ const UpcomingMatches: React.FC = () => {
           </div>
         </div>
         <div className="text-7xl lg:text-8xl font-bold text-white mt-4">
-          <span className="text-6xl">
+          <span className="text-4xl">
             {countdowns[matches.indexOf(upcomingMatch)]}
           </span>
         </div>
       </div>
-      {/* Modal for other matches */}
-      <Modal
-        isOpen={isModalOpen}
-        onRequestClose={() => setIsModalOpen(false)}
-        contentLabel="Other Upcoming Matches"
-        className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-75"
-        overlayClassName=""
-      >
-        <div className="relative bg-gray-800 p-6 rounded-lg w-11/12 max-w-lg">
-          <button
-            onClick={() => setIsModalOpen(false)}
-            className="absolute top-2 right-2 text-white p-2 rounded-full"
-          >
-            <Close className="text-3xl" />
-          </button>
-          <div className="space-y-6">
-            {sortedMatches.slice(1).map((match, index) => (
-              <div
-                key={index}
-                className="text-white p-4 rounded-lg shadow-md hover:bg-gray-800 transition duration-300"
-              >
-                <div className="flex flex-col lg:flex-row justify-between items-center space-x-4">
-                  <div className="flex items-center space-x-2">
-                    <div>
-                      <a
-                        href={`https://lichess.org/@/${match.player1}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-400 text-md lg:text-lg font-medium"
-                      >
-                        {match.player1}
-                      </a>
-                    </div>
-                  </div>
-                  <p className="text-lg lg:text-xl font-semibold text-indigo-500 lg:mx-4">
-                    VS
-                  </p>
-                  <div className="flex items-center space-x-2">
-                    <div>
-                      <a
-                        href={`https://lichess.org/@/${match.player2}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-400 text-md lg:text-lg font-medium"
-                      >
-                        {match.player2}
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <div className="flex flex-wrap justify-between text-xs lg:text-sm text-gray-400 mt-3">
-                  <div className="flex items-center space-x-1">
-                    <span className="font-medium">Date:</span>
-                    <span>
-                      {new Date(match.date).toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                      })}
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <span className="font-medium">Time:</span>
-                    <span>
-                      {new Date(match.date).toLocaleTimeString("en-US", {
-                        hour: "2-digit",
-                        minute: "2-digit",
-                      })}
-                    </span>
-                  </div>
-                  <div className="flex items-center space-x-1">
-                    <span className="font-medium">Format:</span>
-                    <span>3+2 Blitz | 1st to 7 Wins</span>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </Modal>
     </div>
   );
 };

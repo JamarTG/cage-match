@@ -75,23 +75,7 @@ const App: React.FC = () => {
       </main>
 
       
-        <div className="flex flex-col">
-          <footer className="bg-gray-800 text-gray-400 p-2">
-        <div className="container mx-auto px-4 text-center">
-          <p>
-            &copy; 2025 by{" "}
-            <a
-          href="https://github.com/JamarTG"
-          className="text-indigo-400 hover:underline"
-          target="_blank"
-            >
-          JamarTG
-            </a>
-          </p>
-        </div>
-          </footer>
-        </div>
- 
+
     </div>
   );
 };
