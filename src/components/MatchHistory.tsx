@@ -25,7 +25,6 @@ const MatchHistory = () => {
             day: "numeric",
           });
 
-          // Calculate score based on games
           let player1Wins = 0;
           let player2Wins = 0;
 
