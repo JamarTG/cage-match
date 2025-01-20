@@ -130,9 +130,8 @@ const UpcomingMatches: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center mt-6 space-y-4">
-          <div className="flex items-center space-x-2">
-            <span className="text-xl font-semibold">Date:</span>
+        <div className="flex flex-col items-center mt-6">
+          <div className="flex space-x-2">
             <span className="text-xl">
               {new Date(upcomingMatch.date).toLocaleDateString("en-US", {
                 year: "numeric",
@@ -140,25 +139,25 @@ const UpcomingMatches: React.FC = () => {
                 day: "numeric",
               })}
             </span>
-          </div>
-          <div className="flex items-center space-x-2">
-            <span className="text-xl font-semibold">Time:</span>
+
             <span className="text-xl">
+              -{" "}
               {new Date(upcomingMatch.date).toLocaleTimeString("en-US", {
                 hour: "2-digit",
                 minute: "2-digit",
               })}
             </span>
           </div>
+
           <div className="flex items-center space-x-2">
-            <span className="text-xl font-semibold">Format:</span>
+            <span className="icon text-3xl">&#xe008;</span>
             <span className="text-xl">3+2 Blitz | 1st to 7 Wins</span>
           </div>
-        </div>
-        <div className="text-7xl lg:text-8xl font-bold text-white mt-4">
-          <span className="text-4xl">
-            {countdowns[matches.indexOf(upcomingMatch)]}
-          </span>
+          <div className="text-7xl lg:text-8xl font-bold text-white mt-4">
+            <span className="text-4xl">
+              {countdowns[matches.indexOf(upcomingMatch)]}
+            </span>
+          </div>
         </div>
       </div>
     </div>
