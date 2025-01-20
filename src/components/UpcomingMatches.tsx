@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import { Close } from "./svg/Close";
-import upcomingMatches from "../upcomingMatches.json";
+// import upcomingMatches from "../upcomingMatches.json";
+import upcomingMatches from "../upcoming.json";
 import realnames from "../realnames";
 
 Modal.setAppElement("#root");
