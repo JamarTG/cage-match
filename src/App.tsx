@@ -32,7 +32,7 @@ const App: React.FC = () => {
   // Simulating loading content for 2 seconds
   useEffect(() => {
     setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 2000);
+    const timer = setTimeout(() => setLoading(false), 700);
     return () => clearTimeout(timer);
   }, [activeSection]);
 

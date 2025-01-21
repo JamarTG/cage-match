@@ -184,18 +184,27 @@ const PlayerRecords: React.FC = () => {
           <table className="min-w-full table-auto">
             <thead>
               <tr className="text-left text-indigo-400">
-                <th className="px-4 py-2 border-b border-gray-600">Rank</th>
-                <th className="px-4 py-2 border-b border-gray-600">Player</th>
-                <th className="px-4 py-2 border-b border-gray-600">Matches</th>
-                <th className="px-4 py-2 border-b border-gray-600">Games</th>
-                <th className="px-4 py-2 border-b border-gray-600">Points</th>
+                <th className="px-4 py-2 border-b border-gray-600 text-sm">
+                  Rank
+                </th>
+                <th className="px-4 py-2 border-b border-gray-600 text-sm">
+                  Player
+                </th>
+                <th className="px-4 py-2 border-b border-gray-600 text-sm">
+                  Match Record
+                </th>
+                <th className="px-4 py-2 border-b border-gray-600 text-sm">
+                  Game Record
+                </th>
+                <th className="px-4 py-2 border-b border-gray-600 text-sm">
+                  Points
+                </th>
               </tr>
-           
             </thead>
             <tbody>
               {sortedPlayers.map((player, index) => (
                 <tr key={player.name} className="border-b border-gray-700">
-                  <td className="px-4 py-2 border-b border-gray-600 text-2xl font-bold">
+                  <td className="px-4 py-2 border-b border-gray-600 text-md font-bold">
                     <span
                       className={`${
                         index === 0
@@ -220,17 +229,18 @@ const PlayerRecords: React.FC = () => {
                     </span>
                   </td>
                   <td className="px-4 py-2 border-b border-gray-600">
-                    <a
-                      href={`https://lichess.org/@/${player.name}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline"
-                    >
+                    <p>
                       {realnames[player.name.toLocaleLowerCase()] ?? "Unknown"}{" "}
-                      <span className="text-gray-500">
-                        ({player.latestRating})
-                      </span>
-                    </a>{" "}
+                      (<a
+                        href={`https://lichess.org/@/${player.name}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-blue-600"
+                      >
+                        {player.name}
+                      </a>)
+                    </p>
+
                     {player.currentWinStreak >= 2
                       ? `🔥${"🔥".repeat(player.currentWinStreak - 1)}`
                       : ""}
@@ -258,7 +268,9 @@ const PlayerRecords: React.FC = () => {
                     </div>
                   </td>
 
-                  <td className="px-4 py-2 border-b border-gray-600">{player.points}</td>
+                  <td className="px-4 py-2 border-b border-gray-600">
+                    {player.points}
+                  </td>
                 </tr>
               ))}
             </tbody>
