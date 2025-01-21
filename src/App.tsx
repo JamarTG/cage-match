@@ -29,7 +29,6 @@ const App: React.FC = () => {
   const [activeSection, setActiveSection] = useState<string>("upcomingMatches");
   const [loading, setLoading] = useState<boolean>(false);
 
-  // Simulating loading content for 2 seconds
   useEffect(() => {
     setLoading(true);
     const timer = setTimeout(() => setLoading(false), 700);
