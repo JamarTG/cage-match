@@ -140,7 +140,7 @@ const calculateMatchStats = (): PlayerStats[] => {
 };
 
 const PlayerRecords: React.FC = () => {
-  const [sortBy, setSortBy] = useState<string>("performanceScore");
+  const [sortBy, _] = useState<string>("performanceScore");
 
   const players = calculateMatchStats();
 
