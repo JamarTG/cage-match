@@ -34,7 +34,7 @@ const App: React.FC = () => {
     setLoading(true);
     const timer = setTimeout(() => setLoading(false), 700);
     return () => clearTimeout(timer);
-  }, [activeSection]);
+  }, []);
 
   return (
     <div className="min-h-screen text-white">
