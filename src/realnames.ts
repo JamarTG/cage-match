@@ -5,6 +5,7 @@ const playerNames: { [key: string]: string } = {
   samchesstion: "Samuel Smith",
   logic_lodge: "Odane Lodge",
   jamarithegreat: "Jamari McFarlane",
+  scienceguruttxz: "Dujean Edwards"
 };
 
 export default playerNames;
