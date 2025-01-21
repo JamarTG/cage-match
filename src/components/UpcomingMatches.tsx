@@ -146,14 +146,16 @@ const UpcomingMatches: React.FC = () => {
                 href={`https://lichess.org/@/${upcomingMatch.player1}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className=" text-blue-500 text-lg lg:text-2xl font-semibold"
+                className="text-blue-500 flex gap-2 text-lg lg:text-2xl font-semibold"
               >
                 {upcomingMatch.player1}{" "}
-                <span className="text-gray-200">
-                  {info[upcomingMatch.player1]?.rating ?? "..."}{info[upcomingMatch.player1]?.ratingIsProvisional && (
-                  <span>?</span>
-                )}
-                </span>
+                <p className="text-gray-200 w-16 text-md flex justify-center items-center">
+                 
+                  {info[upcomingMatch.player1]?.rating ?? "    "}
+                  {info[upcomingMatch.player1]?.ratingIsProvisional && (
+                    <span>?</span>
+                  )}
+                </p>
               </a>
             </div>
           </div>
@@ -177,19 +179,20 @@ const UpcomingMatches: React.FC = () => {
               className="hidden lg:block w-32 h-32 lg:w-64 lg:h-64 border-4 border-indigo-600"
             />
             <a
-              href={`https://lichess.org/@/${upcomingMatch.player2}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className=" text-blue-500 text-lg lg:text-2xl font-semibold"
-            >
-              {upcomingMatch.player2}{" "}
-              <span className="text-gray-300">
-                {info[upcomingMatch.player2]?.rating ?? "..."}
-                {info[upcomingMatch.player2]?.ratingIsProvisional && (
-                  <span>?</span>
-                )}
-              </span>
-            </a>
+                href={`https://lichess.org/@/${upcomingMatch.player2}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-blue-500 flex gap-2 text-lg lg:text-2xl font-semibold"
+              >
+                {upcomingMatch.player2}{" "}
+                <p className="text-gray-200 w-16 text-md flex justify-center items-center">
+                 
+                  {info[upcomingMatch.player2]?.rating ?? "    "}
+                  {info[upcomingMatch.player2]?.ratingIsProvisional && (
+                    <span>?</span>
+                  )}
+                </p>
+              </a>
           </div>
         </div>
         <div className="flex flex-col items-center mt-6">
