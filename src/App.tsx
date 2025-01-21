@@ -38,33 +38,38 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen text-white">
       <main className="container mx-auto px-4 py-8">
-
         <div className="flex justify-center ml-2 w-4/5 mb-8 text-xs lg:text-sm md:text-xs sm:text-xs">
           <button
             className={`flex justify-center items-center px-4 py-1 mx-2 gap-3 border-2 border-white rounded-lg transition duration-300 ease-in-out transform hover:scale-105 ${
-              activeSection === "upcomingMatches" ? "bg-indigo-600 text-white" : "bg-gray-700"
+              activeSection === "upcomingMatches"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-700"
             }`}
             onClick={() => setActiveSection("upcomingMatches")}
           >
-            <BaselineCalendarMonth className="text-xl" />
+            <BaselineCalendarMonth className="text-xl hidden sm:block" />
             Schedule
           </button>
           <button
             className={`flex justify-center items-center px-4 py-1 mx-2 gap-3 border-2 border-white rounded-lg transition duration-300 ease-in-out transform hover:scale-105 ${
-              activeSection === "playerRecords" ? "bg-indigo-600 text-white" : "bg-gray-700"
+              activeSection === "playerRecords"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-700"
             }`}
             onClick={() => setActiveSection("playerRecords")}
           >
-            <SharpPerson className="text-xl" />
+            <SharpPerson className="text-xl hidden sm:block" />
             Leaderboard
           </button>
           <button
             className={`flex justify-center items-center px-4 py-1 mx-2 gap-3 border-2 border-white rounded-lg transition duration-300 ease-in-out transform hover:scale-105 ${
-              activeSection === "matchHistory" ? "bg-indigo-600 text-white" : "bg-gray-700"
+              activeSection === "matchHistory"
+                ? "bg-indigo-600 text-white"
+                : "bg-gray-700"
             }`}
             onClick={() => setActiveSection("matchHistory")}
           >
-            <BaselineInsertChartOutlined className="text-xl" />
+            <BaselineInsertChartOutlined className="text-xl hidden sm:block" />
             Archive
           </button>
         </div>
