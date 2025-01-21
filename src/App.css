@@ -10,6 +10,7 @@ body {
   background-repeat: no-repeat;
   background-position: center;
   background-attachment: fixed;
+  padding: 3%;
 }
 
 .table-bg {
