@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import upcomingMatches from "../upcoming.json";
-import realnames from "../realnames";
+import playerinfo from "../playerinfo";
 
 Modal.setAppElement("#root");
 
@@ -84,11 +84,11 @@ const UpcomingMatches: React.FC = () => {
           <div className="flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-6">
             <div className="flex flex-col items-center space-x-3">
               <h2 className="text-2xl m-2 font-bold text-center lg:text-left">
-                {realnames[upcomingMatch.player1.toLocaleLowerCase()] ??
+                {playerinfo[upcomingMatch.player1.toLocaleLowerCase()].name ??
                   "Unknown Player"}
               </h2>
               <img
-                src={`/${upcomingMatch.player1}.jpg`}
+                src={`/${playerinfo[upcomingMatch.player1.toLocaleLowerCase()].image}`}
                 alt={`${upcomingMatch.player1}'s avatar`}
                 onError={(e) => (e.currentTarget.src = "/default.jpg")}
                 className="hidden lg:block w-32 h-32 lg:w-64 lg:h-64 border-4 border-indigo-600"
@@ -109,11 +109,11 @@ const UpcomingMatches: React.FC = () => {
           </p>
           <div className="flex flex-col items-center space-x-3">
             <h2 className="text-2xl m-2 font-bold">
-              {realnames[upcomingMatch.player2.toLocaleLowerCase()] ??
+              {playerinfo[upcomingMatch.player2.toLocaleLowerCase()].name ??
                 "Unknown Player"}
             </h2>
             <img
-              src={`/${upcomingMatch.player2}.jpg`}
+              src={`/${playerinfo[upcomingMatch.player2.toLocaleLowerCase()].image}`}
               alt={`${upcomingMatch.player2}'s avatar`}
               onError={(e) => (e.currentTarget.src = "/default.jpg")}
               className="hidden lg:block w-32 h-32 lg:w-64 lg:h-64 border-4 border-indigo-600"

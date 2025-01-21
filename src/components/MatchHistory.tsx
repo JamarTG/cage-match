@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import matchesData from "../matches.json";
-import realnames from "../realnames";
+import realnames from "../playerinfo";
 
 interface MatchRecord {
   id: string;
@@ -77,7 +77,7 @@ const MatchHistory = () => {
                 <div className="flex items-center gap-6 text-sm lg:text-lg md:text-md sm:text-md xs:text-xs 2xs:text-2xs">
                   <div className="flex flex-col text-white font-semibold">
                     <p>
-                      {realnames[record.player1.toLocaleLowerCase()] ??
+                      {realnames[record.player1.toLocaleLowerCase()].name ??
                         record.player1}
                     </p>
 
@@ -107,7 +107,7 @@ const MatchHistory = () => {
 
                   <div className="flex flex-col text-white font-semibold">
                     <p>
-                      {realnames[record.player2.toLocaleLowerCase()] ??
+                      {realnames[record.player2.toLocaleLowerCase()].name ??
                         record.player2}
                     </p>
 

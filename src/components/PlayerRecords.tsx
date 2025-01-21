@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import matchData from "../matches.json";
-import realnames from "../realnames";
+import realnames from "../playerinfo";
 
 interface PlayerStats {
   name: string;
@@ -229,7 +229,7 @@ const PlayerRecords: React.FC = () => {
                         rel="noopener noreferrer"
                         className="text-blue-600"
                       >
-                        {realnames[player.name.toLocaleLowerCase()] ?? player.name.toLocaleLowerCase()}{" "}
+                        {realnames[player.name.toLocaleLowerCase()].name ?? player.name.toLocaleLowerCase()}{" "}
                       </a>
                     
 
