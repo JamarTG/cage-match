@@ -39,7 +39,7 @@ const App: React.FC = () => {
     <div className="min-h-screen text-white">
       <main className="container mx-auto px-4 py-8">
 
-        <div className="flex justify-center mb-8 text-xs lg:text-sm md:text-xs sm:text-xs">
+        <div className="flex justify-center mb-8 p-4 text-xs lg:text-sm md:text-xs sm:text-xs">
           <button
             className={`flex justify-center items-center px-4 py-1 mx-2 gap-3 border-2 border-white rounded-lg transition duration-300 ease-in-out transform hover:scale-105 ${
               activeSection === "upcomingMatches" ? "bg-indigo-600 text-white" : "bg-gray-700"
