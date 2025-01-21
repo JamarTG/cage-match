@@ -162,7 +162,7 @@ const PlayerRecords: React.FC = () => {
       style={{ height: "80vh" }}
       className="bg p-6 rounded-lg space-y-6 text-white"
     >
-      <div className="mb-4 flex items-center space-x-4 text-sm">
+      {/* <div className="mb-4 flex items-center space-x-4 text-sm">
         <label htmlFor="sortBy" className="text-sm font-semibold">
           Sort by:
         </label>
@@ -175,7 +175,7 @@ const PlayerRecords: React.FC = () => {
           <option value="matchesPlayed">Matches Played</option>
           <option value="points">Points</option>
         </select>
-      </div>
+      </div> */}
 
       {players.length === 0 ? (
         <p className="text-gray-500">No players to display.</p>
