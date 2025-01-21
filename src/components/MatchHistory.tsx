@@ -51,7 +51,7 @@ const MatchHistory = () => {
               : "Draw";
           const score = `${player1Wins} - ${player2Wins}`;
 
-          return { id: matchId, date, player1, player2, winner, score };
+          return { id: matchId, date, player1, player2, winner, score,games };
         }
       );
 

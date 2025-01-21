@@ -8,6 +8,13 @@ Modal.setAppElement("#root");
 const UpcomingMatches: React.FC = () => {
   const [matches, setMatches] = useState<any[]>([]);
   const [countdowns, setCountdowns] = useState<{ [key: string]: string }>({});
+  const [info, setInfo] = useState<{
+    [key: string]: {
+      rating: number;
+      title: string | null;
+      ratingIsProvisional: boolean;
+    };
+  }>({});
 
   useEffect(() => {
     setMatches(upcomingMatches.matches);
@@ -37,6 +44,43 @@ const UpcomingMatches: React.FC = () => {
     updateCountdowns();
 
     return () => clearInterval(interval);
+  }, [matches]);
+
+  const fetchPlayerInfo = async (player: string) => {
+    try {
+      const response = await fetch(`https://lichess.org/api/user/${player}`);
+      const data = await response.json();
+      const rating = data.perfs ? data.perfs.blitz.rating : null;
+      const title = data.title ? data.title : null;
+      const ratingIsProvisional = data.perfs?.blitz.provisional || false;
+      return { rating, title, ratingIsProvisional };
+    } catch (error) {
+      console.error(`Error fetching rating for ${player}:`, error);
+      return null;
+    }
+  };
+
+  useEffect(() => {
+    const fetchInfo = async () => {
+      const newInfos: {
+        [key: string]: {
+          title: string | null;
+          rating: number;
+          ratingIsProvisional: boolean;
+        };
+      } = {};
+      for (const match of matches) {
+        const player1Info = await fetchPlayerInfo(match.player1);
+        const player2Info = await fetchPlayerInfo(match.player2);
+        if (player1Info !== null) newInfos[match.player1] = player1Info;
+        if (player2Info !== null) newInfos[match.player2] = player2Info;
+      }
+      setInfo(newInfos);
+    };
+
+    if (matches.length > 0) {
+      fetchInfo();
+    }
   }, [matches]);
 
   const sortedMatches = matches.sort(
@@ -83,24 +127,33 @@ const UpcomingMatches: React.FC = () => {
         <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-6 space-y-6 lg:space-y-0">
           <div className="flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-6">
             <div className="flex flex-col items-center space-x-3">
-              <h2 className="text-2xl m-2 font-bold text-center lg:text-left">
+              <h2 className="flex gap-2 text-2xl m-2 font-bold text-center lg:text-left">
+                <p className="text-orange-500">
+                  {info[upcomingMatch.player1]?.title}{" "}
+                </p>
                 {playerinfo[upcomingMatch.player1.toLocaleLowerCase()].name ??
-                  "Unknown Player"}
+                  "Unknown Player"}{" "}
               </h2>
               <img
-                src={`/${playerinfo[upcomingMatch.player1.toLocaleLowerCase()].image}`}
+                src={`/${
+                  playerinfo[upcomingMatch.player1.toLocaleLowerCase()].image
+                }`}
                 alt={`${upcomingMatch.player1}'s avatar`}
                 onError={(e) => (e.currentTarget.src = "/default.jpg")}
                 className="hidden lg:block w-32 h-32 lg:w-64 lg:h-64 border-4 border-indigo-600"
               />
-              <div className="flex flex-row bg-red-"></div>
               <a
                 href={`https://lichess.org/@/${upcomingMatch.player1}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className=" text-blue-500 text-lg lg:text-2xl font-semibold"
               >
-                {upcomingMatch.player1}
+                {upcomingMatch.player1}{" "}
+                <span className="text-gray-200">
+                  {info[upcomingMatch.player1]?.rating ?? "..."}{info[upcomingMatch.player1]?.ratingIsProvisional && (
+                  <span>?</span>
+                )}
+                </span>
               </a>
             </div>
           </div>
@@ -108,26 +161,35 @@ const UpcomingMatches: React.FC = () => {
             VS
           </p>
           <div className="flex flex-col items-center space-x-3">
-            <h2 className="text-2xl m-2 font-bold">
+            <h2 className="flex gap-2 text-2xl m-2 font-bold text-center lg:text-left">
+              <p className="text-orange-500">
+                {info[upcomingMatch.player2]?.title}{" "}
+              </p>
               {playerinfo[upcomingMatch.player2.toLocaleLowerCase()].name ??
-                "Unknown Player"}
+                "Unknown Player"}{" "}
             </h2>
             <img
-              src={`/${playerinfo[upcomingMatch.player2.toLocaleLowerCase()].image}`}
+              src={`/${
+                playerinfo[upcomingMatch.player2.toLocaleLowerCase()].image
+              }`}
               alt={`${upcomingMatch.player2}'s avatar`}
               onError={(e) => (e.currentTarget.src = "/default.jpg")}
               className="hidden lg:block w-32 h-32 lg:w-64 lg:h-64 border-4 border-indigo-600"
             />
-            <div>
-              <a
-                href={`https://lichess.org/@/${upcomingMatch.player2}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className=" text-blue-500 text-lg lg:text-2xl font-semibold"
-              >
-                {upcomingMatch.player2}
-              </a>
-            </div>
+            <a
+              href={`https://lichess.org/@/${upcomingMatch.player2}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className=" text-blue-500 text-lg lg:text-2xl font-semibold"
+            >
+              {upcomingMatch.player2}{" "}
+              <span className="text-gray-300">
+                {info[upcomingMatch.player2]?.rating ?? "..."}
+                {info[upcomingMatch.player2]?.ratingIsProvisional && (
+                  <span>?</span>
+                )}
+              </span>
+            </a>
           </div>
         </div>
         <div className="flex flex-col items-center mt-6">
