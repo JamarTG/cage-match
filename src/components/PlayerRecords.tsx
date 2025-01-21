@@ -162,7 +162,7 @@ const PlayerRecords: React.FC = () => {
       style={{ height: "80vh" }}
       className="bg p-6 rounded-lg space-y-6 text-white"
     >
-      <div className="mb-4 flex items-center space-x-4">
+      <div className="mb-4 flex items-center space-x-4 text-sm">
         <label htmlFor="sortBy" className="text-sm font-semibold">
           Sort by:
         </label>
@@ -204,7 +204,7 @@ const PlayerRecords: React.FC = () => {
             <tbody>
               {sortedPlayers.map((player, index) => (
                 <tr key={player.name} className="border-b border-gray-700">
-                  <td className="px-4 py-2 border-b border-gray-600 text-md font-bold">
+                  <td className="px-4 py-2 border-b border-gray-600 text-sm font-bold">
                     <span
                       className={`${
                         index === 0
@@ -216,37 +216,29 @@ const PlayerRecords: React.FC = () => {
                           : ""
                       }`}
                     >
-                      {index + 1}
-                      <sup>
-                        {index === 0
-                          ? "st"
-                          : index === 1
-                          ? "nd"
-                          : index === 2
-                          ? "rd"
-                          : "th"}
-                      </sup>
+                      #{index + 1}
+                     
                     </span>
                   </td>
-                  <td className="px-4 py-2 border-b border-gray-600">
-                    <p>
-                      {realnames[player.name.toLocaleLowerCase()] ?? "Unknown"}{" "}
-                      (<a
+                  <td className="px-4 py-2 border-b border-gray-600 text-sm">
+                    
+                
+                      <a
                         href={`https://lichess.org/@/${player.name}`}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="text-blue-600"
                       >
-                        {player.name}
-                      </a>)
-                    </p>
+                        {realnames[player.name.toLocaleLowerCase()] ?? player.name.toLocaleLowerCase()}{" "}
+                      </a>
+                    
 
                     {player.currentWinStreak >= 2
                       ? `🔥${"🔥".repeat(player.currentWinStreak - 1)}`
                       : ""}
                   </td>
                   <td className="px-4 py-2 border-b border-gray-600">
-                    <div className="flex flex-col sm:flex-row sm:space-x-1">
+                    <div className="flex flex-col text-sm sm:flex-row sm:space-x-1">
                       <span className="text-green-500">
                         {player.matchWins}W
                       </span>
@@ -260,7 +252,7 @@ const PlayerRecords: React.FC = () => {
                     </div>
                   </td>
 
-                  <td className="px-4 py-2 border-b border-gray-600">
+                  <td className="px-4 py-2 border-b border-gray-600 text-sm">
                     <div className="flex flex-col sm:flex-row sm:space-x-1">
                       <span className="text-green-500">{player.gameWins}W</span>
                       <span className="text-gray-500">{player.gameDraws}D</span>
@@ -268,7 +260,7 @@ const PlayerRecords: React.FC = () => {
                     </div>
                   </td>
 
-                  <td className="px-4 py-2 border-b border-gray-600">
+                  <td className="px-4 py-2 border-b border-gray-600 text-sm">
                     {player.points}
                   </td>
                 </tr>
