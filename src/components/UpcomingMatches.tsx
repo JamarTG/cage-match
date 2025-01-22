@@ -26,25 +26,34 @@ const UpcomingMatches: React.FC = () => {
       matches.forEach((match, index) => {
         const matchDate = new Date(match.date);
         const timeRemaining = matchDate.getTime() - new Date().getTime();
+  
         if (timeRemaining > 0) {
-          const hours = Math.floor(timeRemaining / 1000 / 60 / 60);
-          const minutes = Math.floor((timeRemaining / 1000 / 60) % 60);
+          const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+          const hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
+          const minutes = Math.floor((timeRemaining / (1000 * 60)) % 60);
           const seconds = Math.floor((timeRemaining / 1000) % 60);
-          newCountdowns[index] = `${String(hours).padStart(2, "0")}:${String(
-            minutes
-          ).padStart(2, "0")}:${String(seconds).padStart(2, "0")}`;
+  
+          const parts = [];
+          if (days > 0) parts.push(`${days}d`);
+          if (days > 0 || hours > 0) parts.push(`${hours}h`);
+          if (days > 0 || hours > 0 || minutes > 0) parts.push(`${minutes}m`);
+          parts.push(`${seconds}s`);
+  
+          newCountdowns[index] = parts.join(" ");
         } else {
           newCountdowns[index] = "Match Started";
         }
       });
+  
       setCountdowns(newCountdowns);
     };
-
-    const interval = setInterval(updateCountdowns, 1000);
+  
     updateCountdowns();
-
-    return () => clearInterval(interval);
+    const intervalId = setInterval(updateCountdowns, 1000);
+    return () => clearInterval(intervalId);
   }, [matches]);
+  
+  
 
   const fetchPlayerInfo = async (player: string) => {
     try {
@@ -87,10 +96,31 @@ const UpcomingMatches: React.FC = () => {
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
-  const now = new Date();
+  const upcomingMatch = sortedMatches.find((match) => {
+    const convertToDate = (dateString: string): Date => {
+      const [datePart, timePart] = dateString.split(" ");
+      const [year, month, day] = datePart.split("-");
+      const [hour, minute] = timePart.split(":");
+      const isPM = timePart.toLowerCase().includes("pm");
+      const hour24 = isPM ? (parseInt(hour) % 12) + 12 : parseInt(hour) % 12;
 
-  const upcomingMatch = sortedMatches[0]
-  
+      // Combine and return as a Date object (assuming input is in UTC-5, adjust as needed)
+      return new Date(
+        Date.UTC(
+          parseInt(year),
+          parseInt(month) - 1,
+          parseInt(day) + 1,
+          hour24,
+          parseInt(minute)
+        )
+      );
+    };
+
+    const now = new Date(); // Current time in UTC or server-local time
+    const matchDate = convertToDate(match.date);
+
+    return matchDate > now;
+  });
 
   if (!upcomingMatch) {
     return (
@@ -135,7 +165,6 @@ const UpcomingMatches: React.FC = () => {
               >
                 {upcomingMatch.player1}{" "}
                 <p className="text-gray-200 w-16 text-md flex justify-center items-center">
-                 
                   {info[upcomingMatch.player1]?.rating ?? "    "}
                   {info[upcomingMatch.player1]?.ratingIsProvisional && (
                     <span>?</span>
@@ -164,20 +193,19 @@ const UpcomingMatches: React.FC = () => {
               className="hidden lg:block w-32 h-32 lg:w-64 lg:h-64 border-4 border-indigo-600"
             />
             <a
-                href={`https://lichess.org/@/${upcomingMatch.player2}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 flex gap-2 text-lg lg:text-2xl font-semibold"
-              >
-                {upcomingMatch.player2}{" "}
-                <p className="text-gray-200 w-16 text-md flex justify-center items-center">
-                 
-                  {info[upcomingMatch.player2]?.rating ?? "    "}
-                  {info[upcomingMatch.player2]?.ratingIsProvisional && (
-                    <span>?</span>
-                  )}
-                </p>
-              </a>
+              href={`https://lichess.org/@/${upcomingMatch.player2}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-500 flex gap-2 text-lg lg:text-2xl font-semibold"
+            >
+              {upcomingMatch.player2}{" "}
+              <p className="text-gray-200 w-16 text-md flex justify-center items-center">
+                {info[upcomingMatch.player2]?.rating ?? "    "}
+                {info[upcomingMatch.player2]?.ratingIsProvisional && (
+                  <span>?</span>
+                )}
+              </p>
+            </a>
           </div>
         </div>
         <div className="flex flex-col items-center mt-6">
