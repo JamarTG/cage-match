@@ -89,7 +89,6 @@ const MatchHistory = () => {
         />
       </div>
 
-      {/* Match Records */}
       <div className="overflow-x-auto">
         {filteredRecords.length > 0 ? (
           filteredRecords.map((record) => (
@@ -127,9 +126,9 @@ const MatchHistory = () => {
                 </div>
               </div>
 
-              {/* Date and additional info */}
+            
               <div className="text-gray-400 text-sm mt-2 text-center">
-                {record.date} | @5:00 PM | Friendly
+                {record.date}
               </div>
             </div>
           ))
