@@ -89,27 +89,8 @@ const UpcomingMatches: React.FC = () => {
 
   const now = new Date();
 
-  const upcomingMatch = sortedMatches.find((match) => {
-    const convertToDate = (dateString: string): Date => {
-      const [datePart, timePart] = dateString.split(" ");
-      const [year, month, day] = datePart.split("-");
-      const [hour, minute] = timePart.split(":");
-      const isPM = timePart.includes("PM");
-      const hour24 = isPM ? (parseInt(hour) % 12) + 12 : parseInt(hour) % 12;
-      
-      return new Date(
-        `${year}-${month}-${day}T${String(hour24).padStart(
-          2,
-          "0"
-        )}:${minute}:00`
-      );
-      
-    };
-
+  const upcomingMatch = sortedMatches[0]
   
-    const matchDate = convertToDate(match.date);
-    return matchDate > now;
-  });
 
   if (!upcomingMatch) {
     return (
