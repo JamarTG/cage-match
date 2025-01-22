@@ -79,12 +79,11 @@ const MatchHistory = () => {
 
   return (
     <div className=" rounded-lg p-4 space-y-4 text-white">
-   
       <div className="flex justify-center mb-4">
         <input
           type="text"
           placeholder="Search by player name ..."
-          className="p-2 rounded bg-transparent text-white w-full sm:w-1/2"
+          className="p-2 rounded bg-transparent text-white w-full sm:w-1/2 border border-transparent focus:border-white border-2 focus:outline-none"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -96,7 +95,6 @@ const MatchHistory = () => {
           filteredRecords.map((record) => (
             <div key={record.id} className="rounded-lg bg-transparent p-4 mb-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center">
-               
                 <div className="flex flex-col items-center text-white font-semibold">
                   <p className="text-lg">
                     {realnames[record.player1.toLocaleLowerCase()]?.name ??
@@ -139,8 +137,6 @@ const MatchHistory = () => {
           <p className="text-gray-400 text-center">No matches found.</p>
         )}
       </div>
-
-      
     </div>
   );
 };

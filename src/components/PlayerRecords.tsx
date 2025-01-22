@@ -188,7 +188,7 @@ const PlayerRecords: React.FC = () => {
                   Rank
                 </th>
                 <th className="px-4 py-2 border-b border-gray-600 text-sm">
-                  Player
+                  Name
                 </th>
                 <th className="px-4 py-2 border-b border-gray-600 text-sm">
                   Record
@@ -238,7 +238,7 @@ const PlayerRecords: React.FC = () => {
                       : ""}
                   </td>
                   <td className="px-4 py-2 border-b border-gray-600">
-                    <div className="flex flex-col text-sm sm:flex-row sm:space-x-1">
+                    <div className="flex gap-2 text-sm sm:flex-row sm:space-x-1">
                       <span className="text-green-500">
                         {player.matchWins}W
                       </span>
