@@ -252,17 +252,7 @@ const PlayerRecords: React.FC = () => {
                     </div>
                   </td>
 
-                  {/* <td className="px-4 py-2 border-b border-gray-600 text-sm">
-                    <div className="flex flex-col sm:flex-row sm:space-x-1">
-                      <span className="text-green-500">{player.gameWins}W</span>
-                      <span className="text-gray-500">{player.gameDraws}D</span>
-                      <span className="text-red-500">{player.gameLosses}L</span>
-                    </div>
-                  </td>
-
-                  <td className="px-4 py-2 border-b border-gray-600 text-sm">
-                    {player.points}
-                  </td> */}
+              
                 </tr>
               ))}
             </tbody>
