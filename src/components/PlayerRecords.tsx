@@ -191,14 +191,14 @@ const PlayerRecords: React.FC = () => {
                   Player
                 </th>
                 <th className="px-4 py-2 border-b border-gray-600 text-sm">
-                  Match Record
+                  Record
                 </th>
-                <th className="px-4 py-2 border-b border-gray-600 text-sm">
+                {/* <th className="px-4 py-2 border-b border-gray-600 text-sm">
                   Game Record
                 </th>
                 <th className="px-4 py-2 border-b border-gray-600 text-sm">
                   Points
-                </th>
+                </th> */}
               </tr>
             </thead>
             <tbody>
@@ -252,7 +252,7 @@ const PlayerRecords: React.FC = () => {
                     </div>
                   </td>
 
-                  <td className="px-4 py-2 border-b border-gray-600 text-sm">
+                  {/* <td className="px-4 py-2 border-b border-gray-600 text-sm">
                     <div className="flex flex-col sm:flex-row sm:space-x-1">
                       <span className="text-green-500">{player.gameWins}W</span>
                       <span className="text-gray-500">{player.gameDraws}D</span>
@@ -262,7 +262,7 @@ const PlayerRecords: React.FC = () => {
 
                   <td className="px-4 py-2 border-b border-gray-600 text-sm">
                     {player.points}
-                  </td>
+                  </td> */}
                 </tr>
               ))}
             </tbody>
