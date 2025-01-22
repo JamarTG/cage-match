@@ -210,23 +210,29 @@ const UpcomingMatches: React.FC = () => {
         <div className="flex flex-col items-center mt-6">
           <div className="">
             <div className="flex  mt-3">
-              <a
-                href="https://www.twitch.tv/masterglaves"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center gap-4 opacity-85 text-white rounded-xl p-4  transition-all transform hover:scale-105"
-              >
-                <Twitch fill="white" className="w-8 h-8" />
+              <div>
                 <div className="flex flex-col">
-                  <span className="text-xl font-bold">
-                    LIVE on Twitch @masterglaves
-                  </span>
+                  <div className="flex flex-col justify-center items-center">
+                    <div className="text-xl flex">
+                      <Twitch className="text-2xl" />
+                      <a
+                        href="https://www.twitch.tv/masterglaves"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        style={{ color: "#6441A4" }}
+                        className="flex items-center gap-4 font-bold rounded-xl transition-all transform hover:scale-105"
+                        // className="text-blue-700 text-xl font-bold"
+                      >
+                        LIVE on Twitch @masterglaves
+                      </a>
+                    </div>
 
-                  <small className="text-sm text-white font-bold mt-1">
-                    Commentary by FM Raheem Glaves and ACM Exelsio
-                  </small>
+                    <i className="text-md text-white font-bold">
+                      Commentary by FM Raheem Glaves and ACM Exelsio
+                    </i>
+                  </div>
                 </div>
-              </a>
+              </div>
             </div>
 
             <div className="flex flex-col items-center">

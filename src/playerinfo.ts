@@ -4,8 +4,9 @@ const playerNames: {
     image: string; 
   } 
 } = {
-  pawnmatedpcm: { name: "Jayden Foreshow", image: "daddystrength.jpg" },
+  pawnmatedpcm: { name: "Jayden Foreshaw", image: "....jpg" },
   theslayertoken456: { name: "Taniel Barrett", image: "theslayertoken456.jpeg" },
+  rarestfrozen: { name: "Taniel Barrett", image: "theslayertoken456.jpeg" },
   daddystrength: { name: "Raheem Glaves", image: "path/to/raheem-image.jpg" },
   samchesstion: { name: "Samuel Smith", image: "path/to/samuel-image.jpg" },
   logic_lodge: { name: "Odane Lodge", image: "path/to/odane-image.jpg" },
