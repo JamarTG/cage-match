@@ -17,6 +17,7 @@ const UpcomingMatches: React.FC = () => {
   }>({});
 
   useEffect(() => {
+    console.log( "upcomingMatches", upcomingMatches.matches);
     setMatches(upcomingMatches.matches);
   }, []);
 
@@ -87,7 +88,11 @@ const UpcomingMatches: React.FC = () => {
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
   );
 
+  
+  
+
   const now = new Date();
+  console.log(sortedMatches)
   const upcomingMatch = sortedMatches.find((match) => {
     const convertToDate = (dateString: string): Date => {
       const [datePart, timePart] = dateString.split(" ");
@@ -95,17 +100,22 @@ const UpcomingMatches: React.FC = () => {
       const [hour, minute] = timePart.split(":");
       const isPM = timePart.includes("PM");
       const hour24 = isPM ? (parseInt(hour) % 12) + 12 : parseInt(hour) % 12;
+      
       return new Date(
         `${year}-${month}-${day}T${String(hour24).padStart(
           2,
           "0"
         )}:${minute}:00`
       );
+      
     };
 
+  
     const matchDate = convertToDate(match.date);
     return matchDate > now;
   });
+  
+  console.log("match", upcomingMatch);
 
   if (!upcomingMatch) {
     return (
