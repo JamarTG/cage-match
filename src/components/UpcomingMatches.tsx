@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Modal from "react-modal";
 import upcomingMatches from "../upcoming.json";
 import playerinfo from "../playerinfo";
+import { Twitch } from "./svg/Twitch";
 
 Modal.setAppElement("#root");
 
@@ -26,34 +27,32 @@ const UpcomingMatches: React.FC = () => {
       matches.forEach((match, index) => {
         const matchDate = new Date(match.date);
         const timeRemaining = matchDate.getTime() - new Date().getTime();
-  
+
         if (timeRemaining > 0) {
           const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
           const hours = Math.floor((timeRemaining / (1000 * 60 * 60)) % 24);
           const minutes = Math.floor((timeRemaining / (1000 * 60)) % 60);
           const seconds = Math.floor((timeRemaining / 1000) % 60);
-  
+
           const parts = [];
           if (days > 0) parts.push(`${days}d`);
           if (days > 0 || hours > 0) parts.push(`${hours}h`);
           if (days > 0 || hours > 0 || minutes > 0) parts.push(`${minutes}m`);
           parts.push(`${seconds}s`);
-  
+
           newCountdowns[index] = parts.join(" ");
         } else {
           newCountdowns[index] = "Match Started";
         }
       });
-  
+
       setCountdowns(newCountdowns);
     };
-  
+
     updateCountdowns();
     const intervalId = setInterval(updateCountdowns, 1000);
     return () => clearInterval(intervalId);
   }, [matches]);
-  
-  
 
   const fetchPlayerInfo = async (player: string) => {
     try {
@@ -140,7 +139,7 @@ const UpcomingMatches: React.FC = () => {
     >
       <div>
         <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-6 space-y-6 lg:space-y-0">
-          <div className="flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-6">
+          <div className="flex flex-col lg:flex-row items-center space-y-2 lg:space-y-0 lg:space-x-6">
             <div className="flex flex-col items-center space-x-3">
               <h2 className="flex gap-2 text-2xl m-2 font-bold text-center lg:text-left">
                 <p className="text-orange-500">
@@ -209,32 +208,53 @@ const UpcomingMatches: React.FC = () => {
           </div>
         </div>
         <div className="flex flex-col items-center mt-6">
-          <div className="flex space-x-2">
-            <span className="text-xl">
-              {new Date(upcomingMatch.date).toLocaleDateString("en-US", {
-                year: "numeric",
-                month: "long",
-                day: "numeric",
-              })}
-            </span>
+          <div className="">
+            <div className="flex  mt-3">
+              <a
+                href="https://www.twitch.tv/masterglaves"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-4 opacity-85 text-white rounded-xl p-4  transition-all transform hover:scale-105"
+              >
+                <Twitch fill="white" className="w-8 h-8" />
+                <div className="flex flex-col">
+                  <span className="text-xl font-bold">
+                    LIVE on Twitch @masterglaves
+                  </span>
 
-            <span className="text-xl">
-              -{" "}
-              {new Date(upcomingMatch.date).toLocaleTimeString("en-US", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </span>
-          </div>
+                  <small className="text-sm text-white font-bold mt-1">
+                    Commentary by FM Raheem Glaves and ACM Exelsio
+                  </small>
+                </div>
+              </a>
+            </div>
 
-          <div className="flex items-center space-x-2">
-            <span className="icon text-3xl">&#xe008;</span>
-            <span className="text-xl">3+2 Blitz | 1st to 7 Wins</span>
-          </div>
-          <div className="text-7xl lg:text-8xl font-bold text-white mt-4">
-            <span className="text-4xl">
-              {countdowns[matches.indexOf(upcomingMatch)]}
-            </span>
+            <div className="flex flex-col items-center">
+              <span className="text-lg">
+                {new Date(upcomingMatch.date).toLocaleDateString("en-US", {
+                  year: "numeric",
+                  month: "long",
+                  day: "numeric",
+                })}{" "}
+                -{" "}
+                {new Date(upcomingMatch.date).toLocaleTimeString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </span>
+
+              <div className="flex items-center">
+                <span className="icon text-3xl">&#xe008;</span>
+                <span className="text-lg pl-1">3+2 Blitz | 1st to 7 Wins</span>
+              </div>
+            </div>
+
+            <div />
+            <div className="flex justify-center text-4xl lg:text-5xl font-bold text-white">
+              <span className="text-xl lg:text-2xl">
+                {countdowns[matches.indexOf(upcomingMatch)]}
+              </span>
+            </div>
           </div>
         </div>
       </div>
