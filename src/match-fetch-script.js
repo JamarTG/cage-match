@@ -53,10 +53,11 @@ const fetchMatches = async (player1, player2, date) => {
 };
 
 const match = {
-  player1: "ScienceguruTTXZ",
+  player1: "mars-706",
   player2: "rarestfrozen",
-  date: "2025-01-22 5:30PM", // Jamaican time (UTC -5)
-};
+  date: "2025-01-23 5:18 PM"
+
+}
 
 
 const matchId = `${match.player1}_vs_${match.player2}_${match.date

@@ -237,7 +237,7 @@ const PlayerRecords: React.FC = () => {
                       {realnames[player.name.toLocaleLowerCase()].name ??
                         player.name.toLocaleLowerCase()}{" "}
                       {player.currentWinStreak >= 2
-                        ? `🔥${"🔥".repeat(player.currentWinStreak - 1)}`
+                        ? `🔥${"🔥".repeat(player.currentWinStreak - 2)}`
                         : ""}
                     </a>
                   </td>
