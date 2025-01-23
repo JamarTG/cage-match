@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import matchData from "../matches.json";
 import realnames from "../playerinfo";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEquals, faHashtag} from "@fortawesome/free-solid-svg-icons";
 
 interface PlayerStats {
   name: string;
@@ -105,14 +107,14 @@ const calculateMatchStats = (): PlayerStats[] => {
       playerStats[player].matchesPlayed++;
       if (wins > losses) {
         playerStats[player].matchWins++;
-        playerStats[player].points += 3;
+        playerStats[player].points += 1; // Award 1 point for a win
         playerStats[player].currentWinStreak++;
       } else if (losses > wins) {
         playerStats[player].matchLosses++;
+        playerStats[player].points -= 1; // Deduct 1 point for a loss
         playerStats[player].currentWinStreak = 0;
       } else {
         playerStats[player].matchDraws++;
-        playerStats[player].points += 1;
       }
     });
   });
@@ -181,30 +183,37 @@ const PlayerRecords: React.FC = () => {
         <p className="text-gray-500">No players to display.</p>
       ) : (
         <div className="overflow-x-auto">
-          <table className="min-w-full table-auto">
+          <table
+            style={{ maxWidth: "100px" }}
+            className="w-1/2 min-w-full table-auto"
+          >
             <thead>
               <tr className="text-left text-indigo-400">
-                <th className="px-4 py-2 border-b border-gray-600 text-sm">
-                  Rank
+                <th className="max-w-8 px-2 py-1 border-b border-gray-600 text-sm"></th>
+
+                <th className="max-w-8 text-center px-2 py-1 border-b border-gray-600 text-lg">
+                  <FontAwesomeIcon icon={faHashtag} />
                 </th>
-                <th className="px-4 py-2 border-b border-gray-600 text-sm">
-                  Name
+
+                <th className="max-w-8 text-center px-2 py-1 border-b border-gray-600 text-lg">
+                  <span className="icon text-green-500" >&#xe02d;</span>
                 </th>
-                <th className="px-4 py-2 border-b border-gray-600 text-sm">
-                  Record
+                <th className="max-w-8 text-center px-2 py-1 border-b border-gray-600 text-md">
+                  <FontAwesomeIcon icon={faEquals} color="grey" />
                 </th>
-                {/* <th className="px-4 py-2 border-b border-gray-600 text-sm">
-                  Game Record
+                <th className="max-w-8 text-center px-2 py-1 border-b border-gray-600 text-md">
+                <span className="icon text-red-500">&#xe02e;</span>
                 </th>
-                <th className="px-4 py-2 border-b border-gray-600 text-sm">
-                  Points
-                </th> */}
+
+                <th className="max-w-8 text-center text-md px-2 py-1 border-b border-gray-600 text-center">
+                  P
+                </th>
               </tr>
             </thead>
             <tbody>
               {sortedPlayers.map((player, index) => (
                 <tr key={player.name} className="border-b border-gray-700">
-                  <td className="px-4 py-2 border-b border-gray-600 text-sm font-bold">
+                  <td className="px-2 py-1 border-b border-gray-600 text-sm">
                     <span
                       className={`${
                         index === 0
@@ -216,43 +225,42 @@ const PlayerRecords: React.FC = () => {
                           : ""
                       }`}
                     >
-                      #{index + 1}
-                     
+                      #{index + 1}{" "}
                     </span>
-                  </td>
-                  <td className="px-4 py-2 border-b border-gray-600 text-sm">
-                    
-                
-                      <a
-                        href={`https://lichess.org/@/${player.name}`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="text-blue-600"
-                      >
-                        {realnames[player.name.toLocaleLowerCase()].name ?? player.name.toLocaleLowerCase()}{" "}
-                      </a>
-                    
 
-                    {player.currentWinStreak >= 2
-                      ? `🔥${"🔥".repeat(player.currentWinStreak - 1)}`
-                      : ""}
-                  </td>
-                  <td className="px-4 py-2 border-b border-gray-600">
-                    <div className="flex gap-2 text-sm sm:flex-row sm:space-x-1">
-                      <span className="text-green-500">
-                        {player.matchWins}W
-                      </span>
-
-                      <span className="text-gray-500">
-                        {player.matchDraws}D
-                      </span>
-                      <span className="text-red-500">
-                        {player.matchLosses}L
-                      </span>
-                    </div>
+                    <a
+                      href={`https://lichess.org/@/${player.name}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-600"
+                    >
+                      {realnames[player.name.toLocaleLowerCase()].name ??
+                        player.name.toLocaleLowerCase()}{" "}
+                      {player.currentWinStreak >= 2
+                        ? `🔥${"🔥".repeat(player.currentWinStreak - 1)}`
+                        : ""}
+                    </a>
                   </td>
 
-              
+                  <td className="text-center max-w-8 ">
+                    <span className="text-white">{player.matchesPlayed}</span>
+                  </td>
+
+                  <td className="text-center max-w-8 ">
+                    <span className="text-green-500">{player.matchWins}</span>
+                  </td>
+
+                  <td className="text-center max-w-8 ">
+                    <span className="text-gray-500">{player.matchDraws}</span>
+                  </td>
+
+                  <td className="text-center max-w-8 ">
+                    <span className="text-red-500">{player.matchLosses}</span>
+                  </td>
+
+                  <td className="max-w-8  px-2 py-1 border-b border-gray-600 text-sm text-center">
+                    {player.points}
+                  </td>
                 </tr>
               ))}
             </tbody>
