@@ -222,14 +222,15 @@ const UpcomingMatches: React.FC = () => {
         {/* Match Details */}
         <div className="flex flex-col items-center mt-6 gap-6">
           <div className="flex items-center gap-4">
-            <Twitch className="text-2xl" />
+            
             <a
               href="https://www.twitch.tv/masterglaves"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white text-2xl font-bold rounded-xl transition-transform transform hover:scale-105"
+              className=" flex justify-center items-center gap-2 text-purple-700  p-2 bg-gray-300 rounded-sm text-2xl font-bold transition-transform transform hover:scale-105"
             >
-              Watch LIVE
+              <Twitch className="text-2xl" /> 
+              <p>Watch LIVE</p>
             </a>
           </div>
   
