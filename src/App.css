@@ -4,7 +4,16 @@
   font-family: "Noto Sans", serif;
 }
 
-body {
+
+.smoke{
+  /* background-image: url("/smak.jpg"); */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+.chess {
   background-image: url("/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
@@ -50,12 +59,11 @@ body::before {
   height: 80%;
 }
 
-.glass-background {
-  background: rgba(20, 50, 132, 0.7);
-  opacity: 0.6;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+.smoke {
+  /* background: rgba(20, 50, 132, 0.7); */
+  background-image: url("/smoke.jpg");
+
+ 
 
   
   color: white;

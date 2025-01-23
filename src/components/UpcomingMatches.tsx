@@ -138,7 +138,7 @@ const UpcomingMatches: React.FC = () => {
   return (
     <div
       style={{ height: "80vh" }}
-      className="bg p-6 rounded-lg space-y-6 text-white"
+      className="p-6 rounded-lg space-y-6 text-white"
     >
       <div>
         <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-6">

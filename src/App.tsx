@@ -36,7 +36,8 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className="min-h-screen text-white">
+    <div className={`${activeSection === "upcomingMatches" ? "smoke" : "chess"
+    } min-h-screen text-white`}>
       <main className="container mx-auto px-2 py-8">
         <div className="flex justify-center w-full w-full mb-8 text-xs lg:text-sm md:text-xs sm:text-xs">
           <button
