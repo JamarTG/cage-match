@@ -4,16 +4,7 @@
   font-family: "Noto Sans", serif;
 }
 
-
-.smoke{
-  background-image: url("/smooke.jpg");
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  background-attachment: fixed;
-}
-
-.chess {
+body {
   background-image: url("/background.jpg");
   background-size: cover;
   background-repeat: no-repeat;
