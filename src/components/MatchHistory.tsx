@@ -30,19 +30,37 @@ const MatchHistory = () => {
             }
           );
 
+          const scores = {
+            [player1.toLowerCase()]: 0,
+            [player2.toLowerCase()]: 0,
+          };
+
           let player1Wins = 0;
           let player2Wins = 0;
 
-          games.forEach((game) => {
+          console.log("==============================");
+
+          for (const game of games) {
             if (game.winner === "white") {
+              scores[game.players.white.user.id] += 1;
               player1Wins++;
             } else if (game.winner === "black") {
+              scores[game.players.black.user.id] += 1;
               player2Wins++;
             } else {
-              player1Wins += 0.5;
-              player2Wins += 0.5;
+              scores[game.players.black.user.id] += 0.5;
+              scores[game.players.white.user.id] += 0.5;
             }
-          });
+
+            console.log(scores);
+
+            if (
+              scores[game.players.white.user.id] === 7 ||
+              scores[game.players.black.user.id] === 7
+            ) {
+              break;
+            }
+          }
 
           const winner =
             player1Wins > player2Wins
@@ -50,13 +68,15 @@ const MatchHistory = () => {
               : player2Wins > player1Wins
               ? player2
               : "Draw";
-          const score = `${player1Wins} - ${player2Wins}`;
+
+            console.log(player1.toLocaleLowerCase(), player2.toLocaleLowerCase());
+          const score = `${scores[player1.toLowerCase()]} - ${scores[player2.toLowerCase()]}`;
 
           return { id: matchId, date, player1, player2, winner, score, games };
         }
       );
 
-      setMatchRecords(records);
+      setMatchRecords(records.reverse());
     };
 
     transformMatches();
@@ -108,11 +128,9 @@ const MatchHistory = () => {
                 </div>
 
                 <div className="flex justify-center items-center text-white font-bold text-3xl md:text-5xl">
-                  {record.player1.toLocaleLowerCase() === "scienceguruttxz" ? "0 - 7" : record.score}
-                  
+                  {record.score}
                 </div>
 
-                {/* Player 2 */}
                 <div className="flex flex-col items-center text-white font-semibold">
                   <p className="text-lg">
                     {realnames[record.player2.toLocaleLowerCase()]?.name ??
@@ -127,7 +145,6 @@ const MatchHistory = () => {
                 </div>
               </div>
 
-            
               <div className="text-gray-400 text-sm mt-2 text-center">
                 {record.date}
               </div>
