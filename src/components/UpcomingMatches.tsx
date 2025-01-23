@@ -141,14 +141,15 @@ const UpcomingMatches: React.FC = () => {
       className="bg p-6 rounded-lg space-y-6 text-white"
     >
       <div>
-        <div className=" flex flex-col lg:flex-row justify-center items-center lg:space-x-6 space-y-6 lg:space-y-0">
-          <div className="w-96  flex flex-col  space-x-3">
-            <h2 className=" flex justify-start gap-2 text-2xl m-2 font-bold text-center lg:text-left">
+        <div className="flex flex-col lg:flex-row justify-center items-center lg:space-x-6">
+          {/* Player 1 Section */}
+          <div className="w-96 flex flex-col space-y-3 items-center">
+            <h2 className="flex flex-col items-center lg:items-start gap-2 text-2xl font-bold text-center lg:text-left">
               <p className="text-orange-500">
-                {info[upcomingMatch.player1]?.title}{" "}
+                {info[upcomingMatch.player1]?.title}
               </p>
               {playerinfo[upcomingMatch.player1.toLocaleLowerCase()].name ??
-                "Unknown Player"}{" "}
+                "Unknown Player"}
             </h2>
             <img
               src={`/${
@@ -156,103 +157,101 @@ const UpcomingMatches: React.FC = () => {
               }`}
               alt={`${upcomingMatch.player1}'s avatar`}
               onError={(e) => (e.currentTarget.src = "/default.jpg")}
-              className="hidden lg:block w-32 h-32 lg:w-64 lg:h-64 border-4 border-indigo-600"
+              className="w-32 h-32 lg:w-64 lg:h-64 border-4 rounded-md border-white"
             />
             <a
               href={`https://lichess.org/@/${upcomingMatch.player1}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="w-full flex items-end justify-start text-blue-500 flex gap-2 text-lg lg:text-2xl font-semibold"
+              className="w-full flex items-center justify-center text-blue-500 gap-2 text-lg lg:text-2xl font-semibold"
             >
               {playerInfo[upcomingMatch.player1].flag === "uganda" ? (
                 <FlagUganda className="w-6 h-6" />
               ) : (
                 <FlagJamaica className="w-6 h-6" />
               )}
-              {upcomingMatch.player1}{" "}
+              {upcomingMatch.player1}
               <p className="text-gray-200 w-16 text-md flex justify-center items-center">
-                {info[upcomingMatch.player1]?.rating ?? "    "}
-                {info[upcomingMatch.player1]?.ratingIsProvisional && (
-                  <span>?</span>
-                )}
+                {info[upcomingMatch.player1]?.rating ?? ""}
+                {info[upcomingMatch.player1]?.ratingIsProvisional && <span>?</span>}
               </p>
             </a>
           </div>
-
-          <p className="text-2xl lg:text-3xl font-bold text-indigo-600 lg:mx-3">
+  
+          <p className="text-2xl lg:text-3xl font-bold text-indigo-600 lg:m-3 ">
             VS
           </p>
-          <div className="w-96  flex items-end flex-col space-x-3">
-            <div>
-              <h2 className="flex gap-2 text-2xl m-2 font-bold text-center lg:text-left">
-                <p className="text-orange-500">
-                  {info[upcomingMatch.player2]?.title}{" "}
-                </p>
-                {playerinfo[upcomingMatch.player2.toLocaleLowerCase()].name ??
-                  "Unknown Player"}{" "}
-              </h2>
-              <img
-                src={`/${
-                  playerinfo[upcomingMatch.player2.toLocaleLowerCase()].image
-                }`}
-                alt={`${upcomingMatch.player2}'s avatar`}
-                onError={(e) => (e.currentTarget.src = "/default.jpg")}
-                className="hidden lg:block w-32 h-32 lg:w-64 lg:h-64 border-4 border-indigo-600"
-              />
-              <a
-                href={`https://lichess.org/@/${upcomingMatch.player2}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full flex items-end justify-end text-blue-500 flex gap-2 text-lg lg:text-2xl font-semibold"
-              >
-                {playerInfo[upcomingMatch.player2].flag === "uganda" ? (
-                  <FlagUganda className="w-6 h-6" />
-                ) : (
-                  <FlagJamaica className="w-6 h-6" />
-                )}
-                {upcomingMatch.player2}{" "}
-                <p className="text-gray-200 w-16 text-md flex justify-center items-center">
-                  {info[upcomingMatch.player2]?.rating ?? "    "}
-                  {info[upcomingMatch.player2]?.ratingIsProvisional && (
-                    <span>?</span>
-                  )}
-                </p>
-              </a>
-            </div>
+  
+          {/* Player 2 Section */}
+          <div className="w-96 flex flex-col space-y-3 items-center">
+            <h2 className="flex flex-col items-center lg:items-start gap-2 text-2xl font-bold text-center lg:text-left">
+              <p className="text-orange-500">
+                {info[upcomingMatch.player2]?.title}
+              </p>
+              {playerinfo[upcomingMatch.player2.toLocaleLowerCase()].name ??
+                "Unknown Player"}
+            </h2>
+            <img
+              src={`/${
+                playerinfo[upcomingMatch.player2.toLocaleLowerCase()].image
+              }`}
+              alt={`${upcomingMatch.player2}'s avatar`}
+              onError={(e) => (e.currentTarget.src = "/default.jpg")}
+              className="w-32 h-32 lg:w-64 lg:h-64 border-4 rounded-md border-white"
+            />
+            <a
+              href={`https://lichess.org/@/${upcomingMatch.player2}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full flex items-center justify-center text-blue-500 gap-2 text-lg lg:text-2xl font-semibold"
+            >
+              {playerInfo[upcomingMatch.player2].flag === "uganda" ? (
+                <FlagUganda className="w-6 h-6" />
+              ) : (
+                <FlagJamaica className="w-6 h-6" />
+              )}
+              {upcomingMatch.player2}
+              <p className="text-gray-200 w-16 text-md flex justify-center items-center">
+                {info[upcomingMatch.player2]?.rating ?? ""}
+                {info[upcomingMatch.player2]?.ratingIsProvisional && <span>?</span>}
+              </p>
+            </a>
           </div>
         </div>
+  
+        {/* Match Details */}
         <div className="flex flex-col items-center mt-6 gap-6">
-          <div className="flex flex-col items-center gap-4">
-            <div className="text-xl flex items-center gap-4">
-              <Twitch className="text-2xl" />
-              <a
-                href="https://www.twitch.tv/masterglaves"
-                target="_blank"
-                rel="noopener noreferrer"
-                style={{ color: "#6441A4" }}
-                className="font-bold rounded-xl transition-transform transform hover:scale-105"
-              >
-                Watch LIVE on Twitch
-              </a>
-            </div>
+          <div className="flex items-center gap-4">
+            <Twitch className="text-2xl" />
+            <a
+              href="https://www.twitch.tv/masterglaves"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-white text-2xl font-bold rounded-xl transition-transform transform hover:scale-105"
+            >
+              Watch LIVE
+            </a>
           </div>
-
+  
           <div className="flex flex-col items-center gap-2">
-            <div className="flex flex-col items-center gap-2">
-              <span className="text-lg">
-                {new Date(upcomingMatch.date).toLocaleDateString("en-US", {
-                  year: "numeric",
-                  month: "long",
-                  day: "numeric",
-                })}
-              </span>
-              <div className="flex justify-center items-center">
-                <span className="icon text-3xl">&#xe008;</span>
-                <span className="text-lg">3+2 Blitz | 1st to 7 Wins</span>
-              </div>
+            <span className="text-lg">
+              {new Date(upcomingMatch.date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+              })}{" "}
+              at{" "}
+              {new Date(upcomingMatch.date).toLocaleTimeString("en-US", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
+            </span>
+            <div className="flex justify-center items-center">
+              <span className="icon text-3xl">&#xe008;</span>
+              <span className="text-lg">3+2 Blitz | 1st to 7 Wins</span>
             </div>
           </div>
-
+  
           <div className="flex justify-center text-4xl lg:text-5xl font-bold text-white">
             <span className="text-xl lg:text-2xl">
               {countdowns[matches.indexOf(upcomingMatch)]}
@@ -262,6 +261,7 @@ const UpcomingMatches: React.FC = () => {
       </div>
     </div>
   );
+  
 };
 
 export default UpcomingMatches;
