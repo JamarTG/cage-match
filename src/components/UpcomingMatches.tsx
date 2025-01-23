@@ -173,15 +173,17 @@ const UpcomingMatches: React.FC = () => {
               {upcomingMatch.player1}
               <p className="text-gray-200 w-16 text-md flex justify-center items-center">
                 {info[upcomingMatch.player1]?.rating ?? ""}
-                {info[upcomingMatch.player1]?.ratingIsProvisional && <span>?</span>}
+                {info[upcomingMatch.player1]?.ratingIsProvisional && (
+                  <span>?</span>
+                )}
               </p>
             </a>
           </div>
-  
+
           <p className="text-2xl lg:text-3xl font-bold text-indigo-600 lg:m-3 ">
             VS
           </p>
-  
+
           {/* Player 2 Section */}
           <div className="w-96 flex flex-col space-y-3 items-center">
             <h2 className="flex flex-col items-center lg:items-start gap-2 text-2xl font-bold text-center lg:text-left">
@@ -213,27 +215,28 @@ const UpcomingMatches: React.FC = () => {
               {upcomingMatch.player2}
               <p className="text-gray-200 w-16 text-md flex justify-center items-center">
                 {info[upcomingMatch.player2]?.rating ?? ""}
-                {info[upcomingMatch.player2]?.ratingIsProvisional && <span>?</span>}
+                {info[upcomingMatch.player2]?.ratingIsProvisional && (
+                  <span>?</span>
+                )}
               </p>
             </a>
           </div>
         </div>
-  
+
         {/* Match Details */}
         <div className="flex flex-col items-center mt-6 gap-6">
           <div className="flex items-center gap-4">
-            
             <a
               href="https://www.twitch.tv/masterglaves"
               target="_blank"
               rel="noopener noreferrer"
-              className=" flex justify-center items-center gap-2 text-purple-700  p-2 bg-gray-300 rounded-sm text-2xl font-bold transition-transform transform hover:scale-105"
+              className="flex justify-center items-center gap-2 text-purple-700 p-2 rounded-sm text-2xl font-bold transition-all duration-300 animate-pulse"
             >
-              <Twitch className="text-2xl" /> 
+              <Twitch className="text-3xl" />
               <p>Watch LIVE</p>
             </a>
           </div>
-  
+
           <div className="flex flex-col items-center gap-2">
             <span className="text-lg">
               {new Date(upcomingMatch.date).toLocaleDateString("en-US", {
@@ -252,7 +255,7 @@ const UpcomingMatches: React.FC = () => {
               <span className="text-lg">3+2 Blitz | 1st to 7 Wins</span>
             </div>
           </div>
-  
+
           <div className="flex justify-center text-4xl lg:text-5xl font-bold text-white">
             <span className="text-xl lg:text-2xl">
               {countdowns[matches.indexOf(upcomingMatch)]}
@@ -262,7 +265,6 @@ const UpcomingMatches: React.FC = () => {
       </div>
     </div>
   );
-  
 };
 
 export default UpcomingMatches;
