@@ -189,31 +189,31 @@ const PlayerRecords: React.FC = () => {
           >
             <thead>
               <tr className="text-left text-indigo-400">
-                <th className="max-w-8 px-2 py-1 border-b border-gray-600 text-sm"></th>
+                <th className="max-w-8 px-2 py-1 text-sm"></th>
 
-                <th className="max-w-8 text-center px-2 py-1 border-b border-gray-600 text-lg">
+                <th className="max-w-8 text-center px-2 py-1 text-lg">
                   <FontAwesomeIcon icon={faHashtag} />
                 </th>
 
-                <th className="max-w-8 text-center px-2 py-1 border-b border-gray-600 text-lg">
+                <th className="max-w-8 text-center px-2 py-1 text-lg">
                   <span className="icon text-green-500">&#xe02d;</span>
                 </th>
-                <th className="max-w-8 text-center px-2 py-1 border-b border-gray-600 text-md">
+                <th className="max-w-8 text-center px-2 py-1  text-md">
                   <FontAwesomeIcon icon={faEquals} color="grey" />
                 </th>
-                <th className="max-w-8 text-center px-2 py-1 border-b border-gray-600 text-md">
+                <th className="max-w-8 text-center px-2 py-1 text-md">
                   <span className="icon text-red-500">&#xe02e;</span>
                 </th>
 
-                <th className="max-w-8 text-center text-md px-2 py-1 border-b border-gray-600 text-center">
+                <th className="max-w-8 text-center text-md px-2 py-1 text-center">
                   P
                 </th>
               </tr>
             </thead>
             <tbody>
               {sortedPlayers.map((player, index) => (
-                <tr key={player.name} className="border-b border-gray-700">
-                  <td className="flex items-center gap-2 px-2 py-1 border-b border-gray-600 text-md">
+                <tr key={player.name} className="">
+                  <td className="flex items-center gap-2 px-2 py-1 text-md">
                     <span
                       className={`${
                         index === 0
