@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import matchData from "../matches.json";
 import realnames from "../playerinfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEquals, faHashtag} from "@fortawesome/free-solid-svg-icons";
+import { faEquals, faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { FlagJamaica } from "./svg/countries/Jamaica";
 
 interface PlayerStats {
   name: string;
@@ -196,13 +197,13 @@ const PlayerRecords: React.FC = () => {
                 </th>
 
                 <th className="max-w-8 text-center px-2 py-1 border-b border-gray-600 text-lg">
-                  <span className="icon text-green-500" >&#xe02d;</span>
+                  <span className="icon text-green-500">&#xe02d;</span>
                 </th>
                 <th className="max-w-8 text-center px-2 py-1 border-b border-gray-600 text-md">
                   <FontAwesomeIcon icon={faEquals} color="grey" />
                 </th>
                 <th className="max-w-8 text-center px-2 py-1 border-b border-gray-600 text-md">
-                <span className="icon text-red-500">&#xe02e;</span>
+                  <span className="icon text-red-500">&#xe02e;</span>
                 </th>
 
                 <th className="max-w-8 text-center text-md px-2 py-1 border-b border-gray-600 text-center">
@@ -213,7 +214,7 @@ const PlayerRecords: React.FC = () => {
             <tbody>
               {sortedPlayers.map((player, index) => (
                 <tr key={player.name} className="border-b border-gray-700">
-                  <td className="px-2 py-1 border-b border-gray-600 text-sm">
+                  <td className="flex items-center gap-2 px-2 py-1 border-b border-gray-600 text-md">
                     <span
                       className={`${
                         index === 0
@@ -227,7 +228,7 @@ const PlayerRecords: React.FC = () => {
                     >
                       #{index + 1}{" "}
                     </span>
-
+                
                     <a
                       href={`https://lichess.org/@/${player.name}`}
                       target="_blank"

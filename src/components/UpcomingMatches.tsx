@@ -3,6 +3,9 @@ import Modal from "react-modal";
 import upcomingMatches from "../upcoming.json";
 import playerinfo from "../playerinfo";
 import { Twitch } from "./svg/Twitch";
+import { FlagJamaica } from "./svg/countries/Jamaica";
+import { FlagUganda } from "./svg/countries/Uganda";
+import playerInfo from "../playerinfo";
 
 Modal.setAppElement("#root");
 
@@ -160,8 +163,13 @@ const UpcomingMatches: React.FC = () => {
                 href={`https://lichess.org/@/${upcomingMatch.player1}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-blue-500 flex gap-2 text-lg lg:text-2xl font-semibold"
+                 className="flex items-end justify-center text-blue-500 flex gap-2 text-lg lg:text-2xl font-semibold"
               >
+                {playerInfo[upcomingMatch.player1].flag === "uganda" ? (
+                  <FlagUganda className="w-6 h-6" />
+                ) : (
+                  <FlagJamaica className="w-6 h-6" />
+                )}
                 {upcomingMatch.player1}{" "}
                 <p className="text-gray-200 w-16 text-md flex justify-center items-center">
                   {info[upcomingMatch.player1]?.rating ?? "    "}
@@ -195,8 +203,13 @@ const UpcomingMatches: React.FC = () => {
               href={`https://lichess.org/@/${upcomingMatch.player2}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-blue-500 flex gap-2 text-lg lg:text-2xl font-semibold"
+              className="flex items-end justify-center text-blue-500 flex gap-2 text-lg lg:text-2xl font-semibold"
             >
+              {playerInfo[upcomingMatch.player2].flag === "uganda" ? (
+                <FlagUganda className="w-6 h-6" />
+              ) : (
+                <FlagJamaica className="w-6 h-6" />
+              )}
               {upcomingMatch.player2}{" "}
               <p className="text-gray-200 w-16 text-md flex justify-center items-center">
                 {info[upcomingMatch.player2]?.rating ?? "    "}
