@@ -198,9 +198,7 @@ const PlayerRecords: React.FC = () => {
                 <th className="max-w-8 text-center px-2 py-1 text-lg">
                   <span className="icon text-green-500">&#xe02d;</span>
                 </th>
-                <th className="max-w-8 text-center px-2 py-1  text-md">
-                  <FontAwesomeIcon icon={faEquals} color="grey" />
-                </th>
+              
                 <th className="max-w-8 text-center px-2 py-1 text-md">
                   <span className="icon text-red-500">&#xe02e;</span>
                 </th>
@@ -248,10 +246,6 @@ const PlayerRecords: React.FC = () => {
 
                   <td className="text-center max-w-8 ">
                     <span className="text-green-500">{player.matchWins}</span>
-                  </td>
-
-                  <td className="text-center max-w-8 ">
-                    <span className="text-gray-500">{player.matchDraws}</span>
                   </td>
 
                   <td className="text-center max-w-8 ">

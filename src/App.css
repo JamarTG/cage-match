@@ -1,8 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
 * {
-  font-family: "Noto Sans", serif;
+  font-family: "Poppins", serif;
 }
+
 
 body {
   background-image: url("/background.jpg");
@@ -12,12 +13,124 @@ body {
   background-attachment: fixed;
 }
 
+
 .table-bg {
   background-image: url("/table.jpeg");
   background-size: cover;
   background-repeat: no-repeat;
   background-color: rgb(25, 25, 25);
 }
+
+.container {
+  padding: 1.5rem;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.no-players-message {
+  color: rgba(255, 255, 255, 0.5);
+  text-align: center;
+  font-size: 1.125rem;
+}
+
+.table-wrapper {
+  max-height: 80%;
+  overflow-x: auto;
+  background-color: rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+}
+
+.player-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-header {
+  background-color: rgba(255, 255, 255, 0.3);
+  color: #8b5cf6;
+  text-align: center;
+}
+
+.header-cell {
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.win-icon {
+  color: #4caf50;
+}
+
+.loss-icon {
+  color: #f44336;
+}
+
+.player-row {
+  transition: background-color 0.3s ease;
+}
+
+.player-row.even {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.player-row.odd {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.player-row:hover {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.player-info {
+  padding: 1rem;
+  font-weight: bold;
+  color: #f3f4f6;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.player-rank {
+  font-weight: bold;
+}
+
+.gold {
+  color: #ffd700;
+}
+
+.silver {
+  color: #c0c0c0;
+}
+
+.bronze {
+  color: #cd7f32;
+}
+
+.player-link {
+  color: #63b3ed;
+  text-decoration: none;
+}
+
+.player-link:hover {
+  text-decoration: underline;
+}
+
+.centered-text {
+  text-align: center;
+  padding: 1rem;
+}
+
+.win {
+  color: #4caf50;
+}
+
+.loss {
+  color: #f44336;
+}
+
 
 /* .bg {
   background-image: url("background.jpg");

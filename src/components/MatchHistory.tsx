@@ -98,7 +98,7 @@ const MatchHistory = () => {
   });
 
   return (
-    <div className=" rounded-lg p-4 space-y-4 text-white">
+    <div className="glass rounded-lg p-4 space-y-4 text-white">
       <div className="flex justify-center mb-4">
         <input
           type="text"
