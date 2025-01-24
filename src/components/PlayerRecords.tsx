@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import matchData from "../matches.json";
 import realnames from "../playerinfo";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEquals, faHashtag } from "@fortawesome/free-solid-svg-icons";
+import { faHashtag } from "@fortawesome/free-solid-svg-icons";
 
 interface PlayerStats {
   name: string;
