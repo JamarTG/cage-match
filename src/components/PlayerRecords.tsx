@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import matchData from "../matches.json";
 import realnames from "../playerinfo";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHashtag } from "@fortawesome/free-solid-svg-icons";
+import playerInfo from "../playerinfo";
 
 interface PlayerStats {
   name: string;
@@ -160,107 +159,92 @@ const PlayerRecords: React.FC = () => {
   });
 
   return (
-    <div
-      style={{ height: "80vh" }}
-      className="bg p-6 rounded-lg space-y-6 text-white"
-    >
-      {/* <div className="mb-4 flex items-center space-x-4 text-sm">
-        <label htmlFor="sortBy" className="text-sm font-semibold">
-          Sort by:
-        </label>
-        <select
-          id="sortBy"
-          value={sortBy}
-          onChange={(e) => setSortBy(e.target.value)}
-          className="p-2 rounded bg-gray-700 text-white border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
-        >
-          <option value="matchesPlayed">Matches Played</option>
-          <option value="points">Points</option>
-        </select>
-      </div> */}
+    <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
+      
+      <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+        <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+          <tr>
+            <th scope="col" className="px-6 py-3">
+              Rank
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Name
+            </th>
+            <th scope="col" className="px-6 py-3">
+              Record
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {sortedPlayers.map((player, index) => (
+            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600">
+              <td className="w-4 p-4">
+                <div className="flex items-center justify-center">{`#${
+                  index + 1
+                }`}</div>
+              </td>
+              <th
+                scope="row"
+                className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white"
+              >
+                <div className="w-10 h-10 rounded-full overflow-hidden">
+                  <img
+                    className="w-full h-full object-cover"
+                    src={`/${
+                      playerInfo[player.name.toLocaleLowerCase()].image
+                    }`}
+                    alt="Jese image"
+                    onError={(e) => {
+                      e.currentTarget.onerror = null; // Prevents infinite loop if default.jpg also fails
+                      e.currentTarget.src = "/default.jpg"; // Path to your default image
+                    }}
+                  />
+                </div>
 
-      {players.length === 0 ? (
-        <p className="text-gray-500">No players to display.</p>
-      ) : (
-        <div className="overflow-x-auto">
-          <table
-            style={{ maxWidth: "100px" }}
-            className="w-1/2 min-w-full table-auto"
-          >
-            <thead>
-              <tr className="text-left text-indigo-400">
-                <th className="max-w-8 px-2 py-1 text-sm"></th>
-
-                <th className="max-w-8 text-center px-2 py-1 text-lg">
-                  <FontAwesomeIcon icon={faHashtag} />
-                </th>
-
-                <th className="max-w-8 text-center px-2 py-1 text-lg">
-                  <span className="icon text-green-500">&#xe02d;</span>
-                </th>
-              
-                <th className="max-w-8 text-center px-2 py-1 text-md">
-                  <span className="icon text-red-500">&#xe02e;</span>
-                </th>
-
-                <th className="max-w-8 text-center text-md px-2 py-1 text-center">
-                  P
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {sortedPlayers.map((player, index) => (
-                <tr key={player.name} className="">
-                  <td className="flex items-center gap-2 px-2 py-1 text-md">
-                    <span
-                      className={`${
-                        index === 0
-                          ? "text-yellow-500"
-                          : index === 1
-                          ? "text-gray-400"
-                          : index === 2
-                          ? "text-yellow-700"
-                          : ""
-                      }`}
-                    >
-                      #{index + 1}{" "}
-                    </span>
-                
+                <div className="ps-3">
+                  <div className="text- font-semibold">
                     <a
                       href={`https://lichess.org/@/${player.name}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-blue-600"
+                      className="text-blue-500 hover:underline"
                     >
-                      {realnames[player.name.toLocaleLowerCase()].name ??
-                        player.name.toLocaleLowerCase()}{" "}
-                      {player.currentWinStreak >= 2
-                        ? `🔥${"🔥".repeat(player.currentWinStreak - 2)}`
-                        : ""}
+                      {player.name}
                     </a>
-                  </td>
+                    {player.currentWinStreak >= 2
+                      ? `🔥${"🔥".repeat(player.currentWinStreak - 2)}`
+                      : ""}
+                  </div>
 
-                  <td className="text-center max-w-8 ">
-                    <span className="text-white">{player.matchesPlayed}</span>
-                  </td>
+                  <div className="font-normal text-gray-300">
+                    {realnames[player.name.toLocaleLowerCase()].name ??
+                      player.name.toLocaleLowerCase()}{" "}
+                  </div>
+                </div>
+              </th>
+              <td className="px-6 py-4 gap-2 relative group">
+                <div className="flex gap-2">
+                  <span className="text-green-500 group-hover:hidden">
+                    {player.matchWins}W
+                  </span>
+                  <span className="text-red-500 group-hover:hidden">
+                    {player.matchLosses}L
+                  </span>
 
-                  <td className="text-center max-w-8 ">
-                    <span className="text-green-500">{player.matchWins}</span>
-                  </td>
-
-                  <td className="text-center max-w-8 ">
-                    <span className="text-red-500">{player.matchLosses}</span>
-                  </td>
-
-                  <td className="max-w-8  px-2 py-1 border-b border-gray-600 text-sm text-center">
-                    {player.points}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-      )}
+                  <span className="text-blue-500 absolute group-hover:block hidden">
+                    {(
+                      (player.matchWins /
+                        (player.matchWins + player.matchLosses)) *
+                      100
+                    ).toFixed(2)}
+                    %
+                  </span>
+                </div>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };

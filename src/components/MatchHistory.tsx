@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import matchesData from "../matches.json";
-import realnames from "../playerinfo";
+
+import playerInfo from "../playerinfo";
 
 interface MatchRecord {
   id: string;
@@ -69,8 +70,10 @@ const MatchHistory = () => {
               ? player2
               : "Draw";
 
-            console.log(player1.toLocaleLowerCase(), player2.toLocaleLowerCase());
-          const score = `${scores[player1.toLowerCase()]} - ${scores[player2.toLowerCase()]}`;
+          console.log(player1.toLocaleLowerCase(), player2.toLocaleLowerCase());
+          const score = `${scores[player1.toLowerCase()]} - ${
+            scores[player2.toLowerCase()]
+          }`;
 
           return { id: matchId, date, player1, player2, winner, score, games };
         }
@@ -88,22 +91,22 @@ const MatchHistory = () => {
     return (
       record.player1.toLowerCase().includes(query) ||
       record.player2.toLowerCase().includes(query) ||
-      realnames[record.player1.toLowerCase()].name
+      playerInfo[record.player1.toLowerCase()].name
         .toLocaleLowerCase()
         .includes(query) ||
-      realnames[record.player2.toLowerCase()].name
+      playerInfo[record.player2.toLowerCase()].name
         .toLocaleLowerCase()
         .includes(query)
     );
   });
 
   return (
-    <div className="glass rounded-lg p-4 space-y-4 text-white">
+    <div className="rounded-lg p-4 space-y-4 text-white">
       <div className="flex justify-center mb-4">
         <input
           type="text"
           placeholder="Search by player name ..."
-          className="p-2 rounded bg-transparent text-white w-full sm:w-1/2 border border-transparent focus:border-white border-2 focus:outline-none"
+          className="p-2 rounded bg-gray-800 text-white w-full sm:w-1/2 border border-transparent focus:border-white border-2 focus:outline-none"
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
@@ -111,45 +114,81 @@ const MatchHistory = () => {
 
       <div className="overflow-x-auto">
         {filteredRecords.length > 0 ? (
-          filteredRecords.map((record) => (
-            <div key={record.id} className="rounded-lg bg-transparent p-4 mb-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 items-center">
-                <div className="flex flex-col items-center text-white font-semibold">
-                  <p className="text-lg">
-                    {realnames[record.player1.toLocaleLowerCase()]?.name ??
-                      record.player1}
-                  </p>
-                  <a
-                    className="text-blue-400 text-sm"
-                    href={`https://lichess.org/@/${record.player1}`}
-                  >
-                    {record.player1}
-                  </a>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {filteredRecords.map((record, index) => (
+              <div
+                key={index}
+                className="bg-white border dark:bg-gray-800 flex flex-col items-center justify-center dark:border-gray-700 border-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 p-4 rounded-lg"
+              >
+                {/* Player 1 */}
+                <div className="flex items-center text-gray-900 whitespace-nowrap dark:text-white mb-2">
+                  <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <img
+                      className="w-full h-full object-cover"
+                      src={`/${
+                        playerInfo[record.player1.toLocaleLowerCase()].image
+                      }`}
+                      alt={`${record.player1} image`}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null; // Prevents infinite loop if default.jpg also fails
+                        e.currentTarget.src = "/default.jpg"; // Path to your default image
+                      }}
+                    />
+                  </div>
+
+                  <div className="ps-3">
+                    <div className="text-base font-semibold">
+                      {record.player1}
+                    </div>
+                    <div className="font-normal text-gray-500">
+                      {playerInfo[record.player1.toLocaleLowerCase()].name}
+                    </div>
+                  </div>
                 </div>
 
-                <div className="flex justify-center items-center text-white font-bold text-3xl md:text-5xl">
+                {/* Score */}
+                <div className="flex items-center justify-center bg-indigo-500 text-white font-bold py-1 px-4 rounded-full shadow-md mb-2">
                   {record.score}
                 </div>
 
-                <div className="flex flex-col items-center text-white font-semibold">
-                  <p className="text-lg">
-                    {realnames[record.player2.toLocaleLowerCase()]?.name ??
-                      record.player2}
-                  </p>
-                  <a
-                    className="text-blue-400 text-sm"
-                    href={`https://lichess.org/@/${record.player2}`}
-                  >
-                    {record.player2}
-                  </a>
+                {/* Player 2 */}
+                <div className="flex items-center text-gray-900 whitespace-nowrap dark:text-white">
+                  <div className="w-10 h-10 rounded-full overflow-hidden">
+                    <img
+                      className="w-full h-full object-cover"
+                      src={`/${
+                        playerInfo[record.player2.toLocaleLowerCase()].image
+                      }`}
+                      alt={`${record.player2} image`}
+                      onError={(e) => {
+                        e.currentTarget.onerror = null; // Prevents infinite loop if default.jpg also fails
+                        e.currentTarget.src = "/default.jpg"; // Path to your default image
+                      }}
+                    />
+                  </div>
+
+                  <div className="ps-3">
+                    <div className="text-base font-semibold">
+                      {record.player2}
+                    </div>
+                    <div className="font-normal text-gray-500">
+                      {playerInfo[record.player2.toLocaleLowerCase()].name}
+                    </div>
+                  </div>
+                </div>
+
+                {/* Match Date */}
+                <div className="mt-2 text-sm text-gray-500 dark:text-gray-300">
+                  {new Date(record.date).toLocaleDateString("en-US", {
+                    weekday: "short", // Abbreviated weekday (e.g., "Mon")
+                    year: "numeric", // Full year (e.g., "2025")
+                    month: "short", // Abbreviated month (e.g., "Jan")
+                    day: "numeric", // Day of the month (e.g., "28")
+                  })}
                 </div>
               </div>
-
-              <div className="text-gray-400 text-sm mt-2 text-center">
-                {record.date}
-              </div>
-            </div>
-          ))
+            ))}
+          </div>
         ) : (
           <p className="text-gray-400 text-center">No matches found.</p>
         )}

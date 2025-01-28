@@ -1,4 +1,4 @@
-const playerNames: { 
+const playerInfo: { 
   [key: string]: { 
     name: string; 
     image: string; 
@@ -17,4 +17,4 @@ const playerNames: {
 };
 
 
-export default playerNames;
+export default playerInfo;
