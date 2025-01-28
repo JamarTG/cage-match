@@ -36,17 +36,20 @@ const App: React.FC = () => {
   }, []);
 
   return (
-    <div className={`min-h-screen text-white`}>
+    <div className="min-h-screen text-white">
       <main className="mx-auto px-2 py-8">
         <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
           <ul className="flex flex-wrap -mb-px">
-           
-            <li className="me-2">
+            <li className="me-2 mb-2">
               <a
                 href="#"
-                className="flex justify-center gap-2 items-center p-4 text-blue-600 border-b-2 border-blue-600 rounded-t-lg active dark:text-blue-500 dark:border-blue-500"
-                aria-current="page"
                 onClick={() => setActiveSection("upcomingMatches")}
+                className={`flex justify-center gap-2 items-center p-4 text-blue-600 ${
+                  activeSection === "upcomingMatches" ? "border-b-2" : ""
+                } rounded-t-lg active dark:text-blue-500 ${
+                  activeSection === "upcomingMatches" ? "dark:border-red-500" : ""
+                }`}
+                aria-current="page"
               >
                 <BaselineCalendarMonth className="text-xl hidden sm:block" />
                 Schedule
@@ -55,28 +58,34 @@ const App: React.FC = () => {
             <li className="me-2">
               <a
                 href="#"
-                className="flex gap-2 p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                 onClick={() => setActiveSection("playerRecords")}
+                className={`flex justify-center gap-2 items-center p-4 text-blue-600 ${
+                  activeSection === "playerRecords" ? "border-b-2" : ""
+                } rounded-t-lg active dark:text-blue-500 ${
+                  activeSection === "playerRecords" ? "dark:border-red-500" : ""
+                }`}
               >
-                  <SharpPerson className="text-xl hidden sm:block" />
+                <SharpPerson className="text-xl hidden sm:block" />
                 Scoreboard
               </a>
             </li>
             <li className="me-2">
               <a
                 href="#"
-                className="flex gap-2 p-4 border-b-2 border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300"
                 onClick={() => setActiveSection("matchHistory")}
-            ><BaselineInsertChartOutlined className="text-xl hidden sm:block" />
+                className={`flex justify-center gap-2 items-center p-4 text-blue-600 ${
+                  activeSection === "matchHistory" ? "border-b-2" : ""
+                } rounded-t-lg active dark:text-blue-500 ${
+                  activeSection === "matchHistory" ? "dark:border-red-500" : ""
+                }`}
+              >
+                <BaselineInsertChartOutlined className="text-xl hidden sm:block" />
                 Archive
               </a>
             </li>
-       
           </ul>
         </div>
-
-      
-
+  
         {loading ? (
           <Loader />
         ) : (
@@ -89,6 +98,7 @@ const App: React.FC = () => {
       </main>
     </div>
   );
+  
 };
 
 export default App;
